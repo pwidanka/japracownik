@@ -1,0 +1,15 @@
+<div class="categories-container">
+    <div class="wrapper">
+        <h2>Kategorie</h2>
+        <div class="categories-grid">
+            @for(category of categories; track category){
+            <mat-card class="category-card">
+                <mat-card-content>
+                    <span class="material-symbols-outlined">{{category.icon}}</span>
+                    <p>{{category.name}}</p>
+                </mat-card-content>
+            </mat-card>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.profil-card {
+  padding: 16px;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-card-content p {
+  white-space: pre-wrap; /* Wyświetlanie enterów z textarea */
+}

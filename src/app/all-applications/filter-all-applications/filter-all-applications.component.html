@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutGap="16px" class="filter-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Wyszukaj po stanowisku lub słowie klucz</mat-label>
+      <input matInput placeholder="Stanowisko lub słowo klucz">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Lokalizacja</mat-label>
+      <mat-select>
+        <mat-option value="0">Wybierz z listy</mat-option>
+        <!-- Dodaj opcje lokalizacji -->
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Kategoria</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-checkbox>IT</mat-checkbox>
+      <mat-checkbox>Inżynieria</mat-checkbox>
+      <mat-checkbox>Praca biurowa</mat-checkbox>
+      <mat-checkbox>Transport & Logistyka</mat-checkbox>
+      <mat-checkbox>Inne</mat-checkbox>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Typ pracy</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-checkbox>Pełen etat</mat-checkbox>
+      <mat-checkbox>Pół etatu</mat-checkbox>
+      <mat-checkbox>Weekendowa</mat-checkbox>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Dostępność</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-checkbox>Natychmiast</mat-checkbox>
+      <mat-checkbox>Za 2 tygodnie</mat-checkbox>
+      <mat-checkbox>Za 1 miesiąc</mat-checkbox>
+      <mat-checkbox>Za 3 miesiące</mat-checkbox>
+      <mat-checkbox>Inne</mat-checkbox>
+    </mat-expansion-panel>
+  
+    <div fxLayout="column" fxLayoutAlign="space-between center" class="salary-filter">
+      <mat-label>Wynagrodzenie</mat-label>
+      <mat-slider min="0" max="9999">
+        <input value="0" matSliderStartThumb>
+        <input value="9999" matSliderEndThumb>
+      </mat-slider>
+      <span>0 - 9999 PLN</span>
+    </div>
+  
+    <button mat-flat-button class="full-width">Wyszukaj</button>
+  </div>
+  

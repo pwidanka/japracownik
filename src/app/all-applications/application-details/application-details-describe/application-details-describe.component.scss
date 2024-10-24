@@ -1,0 +1,84 @@
+.job-posting-container {
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 24px auto;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .job-title {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  .company-name {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .job-info {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .job-description, .job-responsibilities, .job-skills {
+    margin-top: 32px;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  li mat-icon {
+    color: green;
+    margin-right: 8px;
+  }
+  
+  .job-tags {
+    margin-top: 24px;
+  }
+  
+  .tag-list {
+    margin-top: 8px;
+  }
+  
+  mat-chip {
+    background-color: #e0f7fa;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+  
+  .share-job {
+    margin-top: 16px;
+    font-size: 0.9rem;
+  }
+  
+  .share-job mat-icon {
+    cursor: pointer;
+    color: #555;
+  }
+  
+  .share-job mat-icon:hover {
+    color: black;
+  }

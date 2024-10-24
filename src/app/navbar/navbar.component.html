@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="toolbar">
+    <div class="mobile-menu">
+      <!-- Ikona hamburgera na urządzeniach mobilnych -->
+      <button mat-icon-button class="hamburger-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- Logo -->
+      <span class="logo">Logo</span>
+    </div>
+  
+    <!-- Na większych ekranach, menu środkowe -->
+    <div class="desktop-menu">
+      <span class="logo">Logo</span>
+      <span class="spacer"></span>
+      <a mat-button [routerLink]="'/'">Home</a>
+      <a mat-button [routerLink]="'/applications'">Aplikacje</a>
+      <a mat-button [routerLink]="'/about-us'">About Us</a>
+      <a mat-button [routerLink]="'/contact'">Contact Us</a>
+      <span class="spacer"></span>
+      <!-- Przyciski po prawej -->
+      <button mat-flat-button>Login</button>
+      <button mat-raised-button color="accent" [routerLink]="'/add-application'">Add</button>
+    </div>
+  
+    <!-- Na małych ekranach przyciski Login i Add -->
+    <div class="mobile-actions">
+      <button mat-button>Login</button>
+      <button mat-raised-button color="accent">Add</button>
+    </div>
+  </mat-toolbar>

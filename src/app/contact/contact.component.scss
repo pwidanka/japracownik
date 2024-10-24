@@ -1,0 +1,74 @@
+.app-container {
+    background-color: black;
+    height: 200px; // Wysokość na pełen ekran
+    display: flex;
+    justify-content: center; // Wyśrodkowanie w poziomie
+    align-items: center; // Wyśrodkowanie w pionie
+}
+
+.app-title {
+    color: white; // Biały tekst na czarnym tle
+    font-size: 2.5rem; // Rozmiar czcionki
+    font-weight: bold; // Pogrubienie
+    text-transform: uppercase; // Wielkie litery
+}
+
+.application-container{
+    width: 1200px;
+    padding: 20px;
+}
+
+.contact-container {
+    margin: 40px 0;
+  }
+  
+  .contact-info {
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+  
+      .contact-method {
+        align-items: center;
+        margin-bottom: 15px;
+  
+        mat-icon {
+          margin-right: 10px;
+          color: #008080;
+        }
+  
+        p {
+          margin: 0;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+  
+  .contact-form {
+    mat-card {
+      background-color: #f0f7f9;
+      padding: 20px;
+  
+      mat-card-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+  
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: white;
+      }
+  
+      button {
+        width: 100%;
+      }
+    }
+  }

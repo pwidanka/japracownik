@@ -1,0 +1,54 @@
+<div fxLayout="column" fxLayoutGap="20px">
+    <mat-card class="profil-card">
+        <mat-card-header>
+            <mat-card-title>Profil zawodowy</mat-card-title>
+            <button mat-icon-button>
+                <mat-icon (click)="openEditDialog('profilZawodowy', 'Profil zawodowy')">edit</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ profilZawodowy }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="profil-card">
+        <mat-card-header>
+            <mat-card-title>Doświadczenie</mat-card-title>
+            <button mat-icon-button>
+                <mat-icon (click)="openEditDialog('doswiadczenie', 'Doświadczenie')">edit</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ doswiadczenie }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="profil-card">
+        <mat-card-header>
+            <mat-card-title>Wykształcenie</mat-card-title>
+            <button mat-icon-button>
+                <mat-icon (click)="openEditDialog('wyksztalcenie', 'Wykształcenie')">edit</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ wyksztalcenie }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="profil-card">
+        <mat-card-header>
+            <mat-card-title>Umiejętności</mat-card-title>
+            <button mat-icon-button >
+                <mat-icon (click)="openAddDialogSkill()">add</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-chip-set>
+                <mat-chip *ngFor="let skill of skills"  [removable]="true" (click)="openEditDialogSkill(skill)">
+                  {{ skill }}
+                </mat-chip>
+              </mat-chip-set>
+        </mat-card-content>
+    </mat-card>
+
+</div>

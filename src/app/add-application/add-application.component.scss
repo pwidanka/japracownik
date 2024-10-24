@@ -1,0 +1,27 @@
+.app-container {
+    background-color: black;
+    height: 200px; // Wysokość na pełen ekran
+    display: flex;
+    justify-content: center; // Wyśrodkowanie w poziomie
+    align-items: center; // Wyśrodkowanie w pionie
+}
+
+.app-title {
+    color: white; // Biały tekst na czarnym tle
+    font-size: 2.5rem; // Rozmiar czcionki
+    font-weight: bold; // Pogrubienie
+    text-transform: uppercase; // Wielkie litery
+}
+
+.application-container{
+    width: 1200px;
+    padding: 30px;
+}
+
+.form-container {
+    margin-bottom: 30px;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
