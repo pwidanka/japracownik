@@ -1,30 +1,41 @@
-<mat-toolbar color="primary" class="toolbar">
-    <div class="mobile-menu">
-      <!-- Ikona hamburgera na urządzeniach mobilnych -->
-      <button mat-icon-button class="hamburger-button">
+<div style="height: 80vh;">
+  <mat-toolbar color="primary" class="toolbar">
+    <!-- <mat-toolbar-row> -->
+    <div class="desktop-menu">
+
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <!-- Logo -->
       <span class="logo">Logo</span>
+      <span class="spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <a mat-button [routerLink]="'/'">Home</a>
+        <a mat-button [routerLink]="'/applications'">Aplikacje</a>
+        <a mat-button [routerLink]="'/about-us'">About Us</a>
+        <a mat-button [routerLink]="'/contact'">Contact Us</a>
+      </div>
+      <span class="spacer"></span>
     </div>
-  
-    <!-- Na większych ekranach, menu środkowe -->
-    <div class="desktop-menu">
-      <span class="logo">Logo</span>
-      <span class="spacer"></span>
-      <a mat-button [routerLink]="'/'">Home</a>
-      <a mat-button [routerLink]="'/applications'">Aplikacje</a>
-      <a mat-button [routerLink]="'/about-us'">About Us</a>
-      <a mat-button [routerLink]="'/contact'">Contact Us</a>
-      <span class="spacer"></span>
-      <!-- Przyciski po prawej -->
+
+    <div class="mobile-actions">
       <button mat-flat-button>Login</button>
       <button mat-raised-button color="accent" [routerLink]="'/add-application'">Add</button>
     </div>
-  
-    <!-- Na małych ekranach przyciski Login i Add -->
-    <div class="mobile-actions">
-      <button mat-button>Login</button>
-      <button mat-raised-button color="accent">Add</button>
-    </div>
+    <!-- </mat-toolbar-row> -->
   </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+        <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Home</a>
+        <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
+        <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">About Us</a>
+        <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Contact Us</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="background-color: white;">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
