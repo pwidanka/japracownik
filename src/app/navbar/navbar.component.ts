@@ -6,11 +6,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FlexLayoutModule, MatToolbarModule, MatIconModule, MatButtonModule, RouterLink, RouterLinkActive, MatSidenavModule, MatListModule, RouterOutlet],
+  imports: [FlexLayoutModule, MatToolbarModule, MatIconModule, MatButtonModule, RouterLink, RouterLinkActive, MatSidenavModule, MatListModule, RouterOutlet, FooterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
