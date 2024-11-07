@@ -26,7 +26,6 @@
         font-weight: bold;
         margin-bottom: 0px;
         display: flex;
-        /* justify-content: center; */
         align-items: center;
       }
   
@@ -43,7 +42,6 @@
             font-size: 14px;
   
             &:hover {
-              text-decoration: underline;
               color: #27ae60;
             }
           }
@@ -63,5 +61,19 @@
           }
         }
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    li, h3{
+      text-align: center;
+      justify-content: center;
+    }
+    li{
+      margin-bottom: 0 !important;
+    }
+
+    ul{
+      margin: 0;
     }
   }
