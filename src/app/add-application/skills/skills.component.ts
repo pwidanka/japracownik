@@ -97,7 +97,7 @@ import { NgFor, NgIf } from '@angular/common';
   `,
   styles: [`
     .full-width {
-      min-width: 330px;
+      min-width: 300px;
       width: 100%;
       textarea{
         resize: none;
