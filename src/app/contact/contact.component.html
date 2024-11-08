@@ -5,10 +5,11 @@
 
     <div fxLayout="row" fxLayoutAlign="center">
         <div class="application-container" fxLayoutGap="20px">
-            <div fxLayout="row" fxLayoutAlign="space-between center" class="contact-container">
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center" class="contact-container">
                 <!-- Left side with contact information -->
-                <div fxFlex="45" class="contact-info">
-                    <h2>Współpraca, problem, pomysł na udoskonalenie lub po prostu kontakt?</h2>
+                <div fxFlex="45" fxFlex.lt-md="100" class="contact-info">
+                    <h2 fxHide fxShow.gt-sm>Współpraca, problem, pomysł na udoskonalenie lub po prostu kontakt?</h2>
+                    <h4 fxHide fxShow.lt-md>Współpraca, problem, pomysł na udoskonalenie lub po prostu kontakt?</h4>
                     <div fxLayout="row" fxLayoutAlign="start center" class="contact-methods">
                         <div fxFlex="50" class="contact-method">
                             <mat-icon>phone</mat-icon>
@@ -24,7 +25,7 @@
                 </div>
 
                 <!-- Right side with contact form -->
-                <div fxFlex="45" class="contact-form">
+                <div fxFlex="45" fxFlex.lt-md="100" class="contact-form">
                     <mat-card>
                         <mat-card-title>Formularz kontaktowy</mat-card-title>
                         <mat-card-content>

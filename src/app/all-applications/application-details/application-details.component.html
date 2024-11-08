@@ -3,14 +3,10 @@
         <h1 class="app-title">Szczegóły</h1>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="center">
-        <div class="application-container" fxLayoutGap="20px">
-            <div fxFlex="70">
-                <app-application-details-describe></app-application-details-describe>
-            </div>
-            <div fxFlex="30">  
-                <app-application-details-data></app-application-details-data>
-            </div>
+    <div fxLayoutAlign="center">
+        <div class="application-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <app-application-details-describe fxFlex="70"></app-application-details-describe>
+            <app-application-details-data fxFlex="auto"></app-application-details-data>
         </div>
     </div>
 </div>

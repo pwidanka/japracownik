@@ -10,9 +10,9 @@
                 <span>Jesteśmy nowym start-upem, który podchodzi do HR w inny - niestandardowy sposób</span>
             </div>
             <div class="container">
-                <div class="header-section">
-                    <img src="onas.jpg" alt="People working together" />
-                    <div class="text-content">
+                <div class="header-section" fxLayout="row" fxLayout.lt-md="column">
+                    <img src="onas.jpg" alt="People working together" fxFlex="50" fxFlex.lt-md="100"/>
+                    <div class="text-content" fxFlex="45">
                         <h2>HR inny niż zwykle</h2>
                         <p>
                             Na naszym portalu znajdują się utworzone profile kandydatów szukających pracy, posiadających
@@ -23,7 +23,7 @@
 
                 <div class="how-it-works">
                     <h3>Jak to działa?</h3>
-                    <div class="steps">
+                    <div class="steps" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
 
                         <div class="step-card">
                             <div class="icon">
@@ -63,9 +63,7 @@
                 </div>
             </div>
 
-            <div>
-                <app-faq></app-faq>
-            </div>
+            <app-faq></app-faq>
 
         </div>
     </div>

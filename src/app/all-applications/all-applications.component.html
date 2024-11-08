@@ -3,12 +3,12 @@
         <h1 class="app-title">Aplikacje</h1>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="center">
-        <div class="applications-container" fxLayoutGap="20px">
-            <div fxFlex="30">
+    <div fxLayout="row wrap" fxLayoutAlign="center">
+        <div class="applications-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div fxFlex="30" fxFlex.lt-md="100">
                 <app-filter-all-applications></app-filter-all-applications>
             </div>
-            <div fxFlex="70">
+            <div fxFlex="70" fxFlex.lt-md="100">
                 <app-applications></app-applications>
             </div>
         </div>
