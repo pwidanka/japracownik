@@ -5,12 +5,42 @@ import { ApplicationDetailsComponent } from './all-applications/application-deta
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { AddApplicationComponent } from './add-application/add-application.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { authGuard } from './_guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'applications', component: AllApplicationsComponent},
-    { path: 'application-details', component: ApplicationDetailsComponent},
-    { path: 'about-us', component: AboutUsComponent},
-    { path: 'contact', component: ContactComponent},
-    { path: 'add-application', component: AddApplicationComponent},
+    { path: 'login', component: LoginComponent },
+    { path: 'sign-up', component: SignUpComponent },
+    { 
+        path: '', 
+        component: HomeComponent,
+        canActivate: [authGuard]
+    },
+    { 
+        path: 'applications', 
+        component: AllApplicationsComponent,
+        canActivate: [authGuard]
+    },
+    { 
+        path: 'application-details', 
+        component: ApplicationDetailsComponent,
+        canActivate: [authGuard]
+    },
+    { 
+        path: 'about-us', 
+        component: AboutUsComponent,
+        canActivate: [authGuard]
+    },
+    { 
+        path: 'contact', 
+        component: ContactComponent,
+        canActivate: [authGuard]
+    },
+    { 
+        path: 'add-application', 
+        component: AddApplicationComponent,
+        canActivate: [authGuard]
+    },
+    { path: '**', redirectTo: 'login' }
 ];

@@ -1,30 +1,30 @@
 import { inject, Injectable } from "@angular/core";
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@angular/fire/auth";
-import { collection, Firestore } from "@angular/fire/firestore";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
 import { from } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceTest {
-    firebaseAuth = inject(Auth);
-    firestore = inject(Firestore);
-
-    async register(email: string, password: string) {
-        await createUserWithEmailAndPassword(this.firebaseAuth, email, password);
-        // const userId = userCredential.user?.uid
+    private auth: Auth = inject(Auth);
     
-        // //Dodaj użytkownika do Firestore z domyślną rolą
-        // if (userCredential) {
-        // const announcementsRef = collection(this.firestore, 'announcements');
-        //   collection(this.firestore,'users').doc(userId).set({
-        //     email: email,
-        //     role: 'user'
-        //   });
-        // }
-      }
+    // Observable do śledzenia stanu zalogowania
+    isLoggedIn$ = user(this.auth).pipe(
+        map(user => !!user)
+    );
 
     login(email: string, password: string) {
-        const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password);
-        return from(promise);
+        return from(signInWithEmailAndPassword(this.auth, email, password));
     }
 
+    register(email: string, password: string) {
+        return from(createUserWithEmailAndPassword(this.auth, email, password));
+    }
+
+    logout() {
+        return from(signOut(this.auth));
+    }
+
+    getCurrentUser() {
+        return this.auth.currentUser;
+    }
 }

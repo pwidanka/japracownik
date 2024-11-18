@@ -1,1 +1,51 @@
-<p>login works!</p>
+<div fxLayout="column" fxLayoutAlign="center center" class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Logowanie</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Wprowadź email">
+          <mat-icon matPrefix>email</mat-icon>
+          @if (loginForm.get('email')?.hasError('required')) {
+            <mat-error>Email jest wymagany</mat-error>
+          }
+          @if (loginForm.get('email')?.hasError('email')) {
+            <mat-error>Nieprawidłowy format email</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Wprowadź hasło">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          @if (loginForm.get('password')?.hasError('required')) {
+            <mat-error>Hasło jest wymagane</mat-error>
+          }
+          @if (loginForm.get('password')?.hasError('minlength')) {
+            <mat-error>Hasło musi mieć minimum 6 znaków</mat-error>
+          }
+        </mat-form-field>
+
+        @if (errorMessage) {
+          <div class="error-message">{{ errorMessage }}</div>
+        }
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            Zaloguj się
+          </button>
+          <button mat-stroked-button color="accent" type="button" [routerLink]="['/sign-up']">
+            Zarejestruj się
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

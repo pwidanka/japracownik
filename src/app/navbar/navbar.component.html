@@ -1,37 +1,40 @@
 <div style="height: 80vh;">
   <mat-toolbar color="primary" class="toolbar">
-    <!-- <mat-toolbar-row> -->
     <div class="desktop-menu">
-
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
       <span class="logo">Logo</span>
       <span class="spacer"></span>
-      <div fxShow="true" fxHide.lt-md>
-        <a mat-button [routerLink]="'/'">Home</a>
-        <a mat-button [routerLink]="'/applications'">Aplikacje</a>
-        <a mat-button [routerLink]="'/about-us'">About Us</a>
-        <a mat-button [routerLink]="'/contact'">Contact Us</a>
-      </div>
+      @if (isLoggedIn$ | async) {
+        <div fxShow="true" fxHide.lt-md>
+          <a mat-button [routerLink]="'/'">Home</a>
+          <a mat-button [routerLink]="'/applications'">Aplikacje</a>
+          <a mat-button [routerLink]="'/about-us'">About Us</a>
+          <a mat-button [routerLink]="'/contact'">Contact Us</a>
+        </div>
+      }
       <span class="spacer"></span>
     </div>
 
     <div class="mobile-actions">
-      <button mat-flat-button>Login</button>
-      <button mat-raised-button color="accent" [routerLink]="'/add-application'">Add</button>
+      @if (isLoggedIn$ | async) {
+        <button mat-raised-button color="accent" [routerLink]="'/add-application'">Add</button>
+        <button mat-flat-button (click)="logout()">Wyloguj</button>
+      }
     </div>
-    <!-- </mat-toolbar-row> -->
   </mat-toolbar>
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Home</a>
-        <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
-        <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">About Us</a>
-        <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Contact Us</a>
+        @if (isLoggedIn$ | async) {
+          <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Home</a>
+          <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
+          <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">About Us</a>
+          <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Contact Us</a>
+        }
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content style="background-color: white;">

@@ -10,7 +10,7 @@ import { AuthServiceTest } from '../_services/auth.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-sign-up',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -22,12 +22,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     RouterLink
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss'
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class SignUpComponent {
+  signUpForm: FormGroup;
   hidePassword = true;
+  hideConfirmPassword = true;
   errorMessage = '';
 
   constructor(
@@ -35,18 +36,24 @@ export class LoginComponent {
     private authService: AuthServiceTest,
     private router: Router
   ) {
-    this.loginForm = this.fb.group({
+    this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
+  }
+
+  private passwordMatchValidator(g: FormGroup) {
+    return g.get('password')?.value === g.get('confirmPassword')?.value
+      ? null : { mismatch: true };
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
+    if (this.signUpForm.valid) {
+      const { email, password } = this.signUpForm.value;
+      this.authService.register(email, password).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         },
         error: (error) => {
           this.errorMessage = this.getErrorMessage(error.code);
@@ -57,12 +64,10 @@ export class LoginComponent {
 
   private getErrorMessage(errorCode: string): string {
     switch (errorCode) {
-      case 'auth/user-not-found':
-        return 'Nie znaleziono użytkownika o podanym adresie email.';
-      case 'auth/wrong-password':
-        return 'Nieprawidłowe hasło.';
+      case 'auth/email-already-in-use':
+        return 'Konto z tym adresem email już istnieje.';
       default:
-        return 'Wystąpił błąd podczas logowania.';
+        return 'Wystąpił błąd podczas rejestracji.';
     }
   }
-}
+} 
