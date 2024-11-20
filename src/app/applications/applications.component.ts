@@ -1,67 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-applications',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, FlexLayoutModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatIconModule
+  ],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.scss'
 })
-export class ApplicationsComponent {
-  applications = [
-    {
-      title: 'Sekretarka',
-      type: 'Praca biurowa',
-      status: 'Pełen etat',
-      salary: '15000-15200 PLN',
-      location: 'Warszawa'
-    },
-    {
-      title: 'Spawacz',
-      type: 'Inne',
-      status: '1/2 etatu',
-      salary: '5000-5200 PLN',
-      location: 'Gdańsk'
-    },
-    {
-      title: 'Sekretarka',
-      type: 'Praca biurowa',
-      status: 'Pełen etat',
-      salary: '15000-15200 PLN',
-      location: 'Warszawa'
-    },
-    {
-      title: 'Spawacz',
-      type: 'Inne',
-      status: '1/2 etatu',
-      salary: '5000-5200 PLN',
-      location: 'Gdańsk'
-    },
-    {
-      title: 'Sekretarka',
-      type: 'Praca biurowa',
-      status: 'Pełen etat',
-      salary: '15000-15200 PLN',
-      location: 'Warszawa'
-    },
-    {
-      title: 'Spawacz',
-      type: 'Inne',
-      status: '1/2 etatu',
-      salary: '5000-5200 PLN',
-      location: 'Gdańsk'
-    },
-    // inne aplikacje...
-  ];
+export class ApplicationsComponent implements OnInit {
+  applications: any[] = [];
 
   constructor(private router: Router) {}
+
+  async ngOnInit() {
+    await this.loadApplications();
+  }
+
+  async loadApplications() {
+    const db = getFirestore();
+    const applicationsCollection = collection(db, 'announcements');
+    const querySnapshot = await getDocs(applicationsCollection);
+    console.log(querySnapshot);
+    this.applications = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log(this.applications);
+  }
   
-  viewApplicationDetails(title: string) {
+  viewApplicationDetails() {
     this.router.navigate(['/application-details']);
   }
 }

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-skills',
@@ -14,18 +15,36 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
-    NgFor
   ],
   templateUrl: './skills.component.html',
-  styleUrl: './skills.component.scss'
+  styleUrl: './skills.component.scss',
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective
+    }
+  ]
 })
-export class SkillsComponent {
+export class SkillsComponent implements OnInit {
   profilZawodowy = 'I\'m an experienced Frontend Developer. I\'m constantly learning new technologies to stay up-to-date in the frontend world.';
   doswiadczenie = 'custom doswiadczenie';
   wyksztalcenie = 'custom edukacja';
   skills: string[] = ['Umiejętność 1', 'Umiejętność 2'];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private formGroupDirective: FormGroupDirective
+  ) {}
+
+  ngOnInit() {
+    const parentForm = this.formGroupDirective.form;
+    parentForm.patchValue({
+      profilZawodowy: this.profilZawodowy,
+      doswiadczenie: this.doswiadczenie,
+      wyksztalcenie: this.wyksztalcenie,
+      skills: this.skills
+    });
+  }
 
   openEditDialog(property: keyof SkillsComponent, tytul: string): void {
     const dialogRef = this.dialog.open(TextAreaDialogComponent, {
@@ -35,6 +54,8 @@ export class SkillsComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this[property] = result.value;
+        const parentForm = this.formGroupDirective.form;
+        parentForm.patchValue({ [property]: result.value });
       }
     });
   }
@@ -77,7 +98,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-textarea-dialog',
@@ -123,7 +143,7 @@ export class TextAreaDialogComponent {
 
 @Component({
   selector: 'app-skills-dialog',
-  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogModule, NgIf],
+  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogModule],
   standalone: true,
   template:`
     <h1 mat-dialog-title>{{ data.skill ? 'Edytuj umiejętność' : 'Dodaj umiejętność' }}</h1>

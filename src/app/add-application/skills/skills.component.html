@@ -44,9 +44,11 @@
         </mat-card-header>
         <mat-card-content>
             <mat-chip-set>
-                <mat-chip *ngFor="let skill of skills"  [removable]="true" (click)="openEditDialogSkill(skill)">
-                  {{ skill }}
-                </mat-chip>
+                @for (skill of skills; track skill) {
+                  <mat-chip [removable]="true" (click)="openEditDialogSkill(skill)">
+                    {{ skill }}
+                  </mat-chip>
+                }
               </mat-chip-set>
         </mat-card-content>
     </mat-card>

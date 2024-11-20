@@ -5,69 +5,76 @@
 
     <div fxLayout="row" fxLayoutAlign="center">
         <div class="application-container">
-            <div fxLayout="row wrap" fxLayoutAlign="space-between" class="form-container">
+            <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+                <div fxLayout="row wrap" fxLayoutAlign="space-between" class="form-container">
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Imię i Nazwisko</mat-label>
+                        <mat-icon matPrefix>person</mat-icon>
+                        <input matInput formControlName="fullName">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Imię i Nazwisko</mat-label>
-                    <mat-icon matPrefix>person</mat-icon>
-                    <input matInput>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Adres e-mail</mat-label>
+                        <mat-icon matPrefix>mail</mat-icon>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Adres e-mail</mat-label>
-                    <mat-icon matPrefix>mail</mat-icon>
-                    <input matInput>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Oczekiwane stanowisko</mat-label>
+                        <mat-icon matPrefix>work</mat-icon>
+                        <input matInput formControlName="position">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Oczekiwane stanowisko</mat-label>
-                    <mat-icon matPrefix>work</mat-icon>
-                    <input matInput>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Oczekiwania finansowe</mat-label>
+                        <mat-icon matPrefix>attach_money</mat-icon>
+                        <input matInput formControlName="salary" placeholder="0-PLN">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Oczekiwania finansowe</mat-label>
-                    <mat-icon matPrefix>attach_money</mat-icon>
-                    <input matInput placeholder="0-PLN">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Kategoria</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Kategoria</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Tryb pracy</mat-label>
+                        <mat-select formControlName="workMode">
+                            <mat-option *ngFor="let mode of workModes" [value]="mode">{{ mode }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Tryb pracy</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let mode of workModes" [value]="mode">{{ mode }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Dostępność od</mat-label>
+                        <mat-icon matPrefix>schedule</mat-icon>
+                        <input matInput formControlName="availableFrom" [matDatepicker]="picker" placeholder="Wybierz datę">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                  <mat-label>Dostępność od</mat-label>
-                  <mat-icon matPrefix>schedule</mat-icon>
-                  <input matInput [matDatepicker]="picker" placeholder="Wybierz datę">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>Miejsce pracy</mat-label>
+                        <mat-select multiple formControlName="workPlace">
+                            <mat-option *ngFor="let place of places" [value]="place">{{ place }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>Miejsce pracy</mat-label>
-                    <mat-select multiple>
-                        <mat-option *ngFor="let place of places" [value]="place">{{ place }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
+                        <mat-label>NIP Pracodawcy</mat-label>
+                        <input matInput formControlName="employerNip">
+                        <mat-hint>Możesz wpisać NIP firmy, której nie chcesz pokazywać aplikacji</mat-hint>
+                    </mat-form-field>
+                </div>
 
-                <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                    <mat-label>NIP Pracodawcy</mat-label>
-                    <input matInput>
-                    <mat-hint>Możesz wpisać NIP firmy, której nie chcesz pokazywać aplikacji</mat-hint>
-                </mat-form-field>
+                <app-skills></app-skills>
 
-            </div>
-            <app-skills></app-skills>
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <button mat-flat-button color="primary" type="submit" [disabled]="!applicationForm.valid">
+                        Dodaj aplikację
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

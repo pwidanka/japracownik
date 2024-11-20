@@ -53,7 +53,7 @@ export class SignUpComponent {
       const { email, password } = this.signUpForm.value;
       this.authService.register(email, password).subscribe({
         next: () => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         },
         error: (error) => {
           this.errorMessage = this.getErrorMessage(error.code);
