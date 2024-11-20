@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,5 +12,5 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './application-details-data.component.scss'
 })
 export class ApplicationDetailsDataComponent {
-
+  @Input() announcement: any;
 }

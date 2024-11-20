@@ -1,69 +1,68 @@
 <div class="job-overview-container" fxLayout="column" fxLayoutGap="16px">
-    <p class="section-title">Job Overview</p>
+    <p class="section-title">Przegląd oferty</p>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>person</mat-icon>
       <div>
-        <p class="info-title">Job Title</p>
-        <p>Corporate Solutions Executive</p>
+        <p class="info-title">Imię i nazwisko</p>
+        <p>{{ announcement?.fullName }}</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>work</mat-icon>
       <div>
-        <p class="info-title">Job Type</p>
-        <p>Full Time</p>
+        <p class="info-title">Stanowisko</p>
+        <p>{{ announcement?.position }}</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>category</mat-icon>
       <div>
-        <p class="info-title">Category</p>
-        <p>Commerce</p>
-      </div>
-    </div>
-  
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <mat-icon>timelapse</mat-icon>
-      <div>
-        <p class="info-title">Experience</p>
-        <p>5 Years</p>
+        <p class="info-title">Kategoria</p>
+        <p>{{ announcement?.category }}</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>school</mat-icon>
       <div>
-        <p class="info-title">Degree</p>
-        <p>Master</p>
+        <p class="info-title">Wykształcenie</p>
+        <p>{{ announcement?.wyksztalcenie }}</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>attach_money</mat-icon>
       <div>
-        <p class="info-title">Offered Salary</p>
-        <p>$40,000 - $42,000</p>
+        <p class="info-title">Wynagrodzenie</p>
+        <p>{{ announcement?.salary }} PLN</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <mat-icon>wc</mat-icon>
+      <mat-icon>business_center</mat-icon>
       <div>
-        <p class="info-title">Gender</p>
-        <p>All</p>
+        <p class="info-title">Tryb pracy</p>
+        <p>{{ announcement?.workMode }}</p>
       </div>
     </div>
   
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>location_on</mat-icon>
       <div>
-        <p class="info-title">Location</p>
-        <p>New-York, USA</p>
+        <p class="info-title">Lokalizacja</p>
+        <p>{{ announcement?.workPlace.join(', ') }}</p>
       </div>
     </div>
-  
-  </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <mat-icon>email</mat-icon>
+      <div>
+        <p class="info-title">Email</p>
+        <p>{{ announcement?.email }}</p>
+      </div>
+    </div>
+</div>
   

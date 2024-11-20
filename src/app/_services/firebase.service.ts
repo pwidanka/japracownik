@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { collection, collectionData, Firestore, query, where, addDoc, doc, updateDoc, deleteDoc } from "@angular/fire/firestore";
+import { collection, collectionData, Firestore, query, where, addDoc, doc, updateDoc, deleteDoc, docData } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
@@ -30,5 +30,11 @@ export class FirebaseService {
     deleteAnnouncement(id: string) {
         const docRef = doc(this.firestore, 'announcements', id);
         return deleteDoc(docRef);
+    }
+
+    // Dodaj nową metodę do pobierania pojedynczego ogłoszenia
+    getAnnouncementById(id: string): Observable<any> {
+        const docRef = doc(this.firestore, 'announcements', id);
+        return docData(docRef);
     }
 }

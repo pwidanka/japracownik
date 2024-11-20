@@ -1,68 +1,59 @@
 <div class="job-posting-container">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-      <div>
-        <h1 class="job-title">Corporate Solutions Executive</h1>
-        <p class="company-name">Leffler and Sons</p>
-      </div>
-    </div>
-  
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="12px" class="job-info">
-      <div fxLayout="row" fxLayoutGap="8px">
-        <mat-icon>business</mat-icon>
-        <span>Commerce</span>
-      </div>
-      <div fxLayout="row" fxLayoutGap="8px">
-        <mat-icon>schedule</mat-icon>
-        <span>Full time</span>
-      </div>
-      <div fxLayout="row" fxLayoutGap="8px">
-        <mat-icon>attach_money</mat-icon>
-        <span>$40,000 - $42,000</span>
-      </div>
-      <div fxLayout="row" fxLayoutGap="8px">
-        <mat-icon>location_on</mat-icon>
-        <span>New York, USA</span>
-      </div>
-    </div>
-  
-    <div class="job-description">
-      <h2>Job Description</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-    </div>
-  
-    <div class="job-responsibilities">
-      <h2>Key Responsibilities</h2>
-      <ul>
-        <li><mat-icon>check_circle</mat-icon> Lorem ipsum dolor sit amet</li>
-        <li><mat-icon>check_circle</mat-icon> Cras facilisis dignissim augue lorem</li>
-        <li><mat-icon>check_circle</mat-icon> Orci imperdiet nisi dignissim</li>
-      </ul>
-    </div>
-  
-    <div class="job-skills">
-      <h2>Professional Skills</h2>
-      <ul>
-        <li><mat-icon>check_circle</mat-icon> Ornare varius faucibus</li>
-        <li><mat-icon>check_circle</mat-icon> Tortor amet porta</li>
-      </ul>
-    </div>
-  
-    <div class="job-tags">
-      <h3>Tags:</h3>
-      <div fxLayout="row" fxLayoutGap="8px" class="tag-list">
-        <mat-chip-set>
-          <mat-chip>Full time</mat-chip>
-          <mat-chip>Commerce</mat-chip>
-          <mat-chip>New York</mat-chip>
-          <mat-chip>Corporate</mat-chip>
-          <mat-chip>Location</mat-chip>
-        </mat-chip-set>
-      </div>
-    </div>
-  
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" class="share-job">
-      <span>Share Job:</span>
-      <mat-icon>facebook</mat-icon>
-      <mat-icon>email</mat-icon>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <div>
+      <h1 class="job-title">{{ announcement?.position }}</h1>
+      <p class="company-name">{{ announcement?.fullName }}</p>
     </div>
   </div>
+
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="12px" class="job-info">
+    <div fxLayout="row" fxLayoutGap="8px">
+      <mat-icon>business</mat-icon>
+      <span>{{ announcement?.category }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <mat-icon>schedule</mat-icon>
+      <span>{{ announcement?.workMode }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <mat-icon>attach_money</mat-icon>
+      <span>{{ announcement?.salary }} PLN</span>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <mat-icon>location_on</mat-icon>
+      <span>{{ announcement?.workPlace?.join(', ') }}</span>
+    </div>
+  </div>
+
+  <div class="job-description">
+    <h2><mat-icon>check_circle</mat-icon>Profil zawodowy</h2>
+    <p>{{ announcement?.profilZawodowy }}</p>
+  </div>
+
+  <div class="job-responsibilities">
+    <h2><mat-icon>check_circle</mat-icon>Doświadczenie</h2>
+    <p>{{ announcement?.doswiadczenie }}</p>
+  </div>
+
+  <div class="job-skills">
+    <h2><mat-icon>check_circle</mat-icon>Wykształcenie</h2>
+    <p>{{ announcement?.wyksztalcenie }}</p>
+  </div>
+
+  <div class="job-tags">
+    <h3>Umiejętności:</h3>
+    <div fxLayout="row" fxLayoutGap="8px" class="tag-list">
+      <mat-chip-set>
+        @for (skill of announcement?.skills; track skill) {
+        <mat-chip>{{ skill }}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" class="share-job">
+    <span>Share Job:</span>
+    <mat-icon>facebook</mat-icon>
+    <mat-icon>email</mat-icon>
+  </div>
+</div>

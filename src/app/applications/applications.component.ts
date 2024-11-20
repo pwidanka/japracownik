@@ -41,7 +41,7 @@ export class ApplicationsComponent implements OnInit {
     console.log(this.applications);
   }
   
-  viewApplicationDetails() {
-    this.router.navigate(['/application-details']);
+  viewApplicationDetails(id: string) {
+    this.router.navigate(['/application-details', id]);
   }
 }
