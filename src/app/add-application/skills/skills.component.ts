@@ -26,10 +26,10 @@ import { ControlContainer, FormGroupDirective } from '@angular/forms';
   ]
 })
 export class SkillsComponent implements OnInit {
-  profilZawodowy = 'I\'m an experienced Frontend Developer. I\'m constantly learning new technologies to stay up-to-date in the frontend world.';
-  doswiadczenie = 'custom doswiadczenie';
-  wyksztalcenie = 'custom edukacja';
-  skills: string[] = ['Umiejętność 1', 'Umiejętność 2'];
+  profilZawodowy = '';
+  doswiadczenie = '';
+  wyksztalcenie = '';
+  skills: string[] = [];
 
   constructor(
     private dialog: MatDialog,

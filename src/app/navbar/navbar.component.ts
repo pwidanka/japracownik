@@ -8,11 +8,13 @@ import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthServiceTest } from '../_services/auth.service';
 import { AsyncPipe } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
+    FlexLayoutModule,
     MatToolbarModule, 
     MatIconModule, 
     MatButtonModule, 

@@ -8,6 +8,9 @@ import { AddApplicationComponent } from './add-application/add-application.compo
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { authGuard } from './_guards/auth.guard';
+import { TermsComponent } from './footer/terms/terms.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { CookiesComponent } from './footer/cookies/cookies.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -41,6 +44,18 @@ export const routes: Routes = [
         path: 'add-application', 
         component: AddApplicationComponent,
         canActivate: [authGuard]
+    },
+    {
+        path: 'terms',
+        component: TermsComponent
+    },
+    {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
+    },
+    {
+        path: 'cookies',
+        component: CookiesComponent
     },
     { path: '**', redirectTo: 'login' }
 ];

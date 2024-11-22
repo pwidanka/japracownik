@@ -1,17 +1,17 @@
 <div style="height: 80vh;">
   <mat-toolbar color="primary" class="toolbar">
     <div class="desktop-menu">
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="logo">Logo</span>
-      <span class="spacer"></span>
       @if (isLoggedIn$ | async) {
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="logo">Logo</span>
+        <span class="spacer"></span>
         <div fxShow="true" fxHide.lt-md>
-          <a mat-button [routerLink]="'/'">Home</a>
+          <a mat-button [routerLink]="'/'">Strona główna</a>
           <a mat-button [routerLink]="'/applications'">Aplikacje</a>
-          <a mat-button [routerLink]="'/about-us'">About Us</a>
-          <a mat-button [routerLink]="'/contact'">Contact Us</a>
+          <a mat-button [routerLink]="'/about-us'">O nas</a>
+          <a mat-button [routerLink]="'/contact'">Kontakt</a>
         </div>
       }
       <span class="spacer"></span>
@@ -19,7 +19,7 @@
 
     <div class="mobile-actions">
       @if (isLoggedIn$ | async) {
-        <button mat-raised-button color="accent" [routerLink]="'/add-application'">Add</button>
+        <button mat-raised-button color="accent" [routerLink]="'/add-application'">Dodaj</button>
         <button mat-flat-button (click)="logout()">Wyloguj</button>
       }
     </div>
@@ -30,10 +30,10 @@
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
         @if (isLoggedIn$ | async) {
-          <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Home</a>
+          <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Strona główna</a>
           <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
-          <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">About Us</a>
-          <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Contact Us</a>
+          <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">O nas</a>
+          <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Kontakt</a>
         }
       </mat-nav-list>
     </mat-sidenav>
