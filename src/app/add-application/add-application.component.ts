@@ -5,7 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SkillsComponent } from './skills/skills.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +12,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../_services/firebase.service';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
+import { CategoriesService } from '../categories/categories.service';
+import { CitiesService } from '../_services/cities.service';
+import { WorkPlaceInputComponent } from '../shared/components/work-place-input/work-place-input.component';
+
 
 @Component({
   selector: 'app-add-application',
@@ -25,24 +28,26 @@ import { Auth } from '@angular/fire/auth';
     MatSelectModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    NgFor,
     SkillsComponent,
-    MatButtonModule
+    MatButtonModule,
+    WorkPlaceInputComponent
   ],
   templateUrl: './add-application.component.html',
   styleUrl: './add-application.component.scss'
 })
 export class AddApplicationComponent {
   applicationForm: FormGroup;
-  categories = ['Kategoria 1', 'Kategoria 2', 'Kategoria 3'];
+  categories: string[] = [];
   workModes = ['Pełny etat', 'Część etatu', 'Zdalnie', 'Hybrydowo'];
-  places = ['Miasto 1', 'Miasto 2', 'Miasto 3'];
+  places: string[] = [];
 
   constructor(
     private fb: FormBuilder, 
     private firebaseService: FirebaseService,
     private router: Router,
-    private auth: Auth
+    private auth: Auth,
+    private categoriesService: CategoriesService,
+    private citiesService: CitiesService
   ) {
     this.applicationForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -61,30 +66,36 @@ export class AddApplicationComponent {
     });
   }
 
+  ngOnInit() {
+    this.categories = this.categoriesService.getCategories().map(cat => cat.name);
+    this.places = this.citiesService.getCities();
+  }
+
   async onSubmit() {
-    if (this.applicationForm.valid) {
-      try {
-        const currentUser = await this.auth.currentUser;
+    console.log(this.applicationForm.value);
+    // if (this.applicationForm.valid) {
+    //   try {
+    //     const currentUser = await this.auth.currentUser;
         
-        if (!currentUser) {
-          console.error('Użytkownik nie jest zalogowany');
-          return;
-        }
+    //     if (!currentUser) {
+    //       console.error('Użytkownik nie jest zalogowany');
+    //       return;
+    //     }
 
-        const application = {
-          ...this.applicationForm.value,
-          createdAt: new Date(),
-          status: 'pending',
-          author: currentUser.uid
-        };
+    //     const application = {
+    //       ...this.applicationForm.value,
+    //       createdAt: new Date(),
+    //       status: 'pending',
+    //       author: currentUser.uid
+    //     };
 
-        await this.firebaseService.addAnnouncement(application);
-        this.router.navigate(['/applications']);
-      } catch (error) {
-        console.error('Błąd podczas dodawania aplikacji:', error);
-      }
-    } else {
-      console.log('Formularz jest nieprawidłowy:', this.applicationForm.errors);
-    }
+    //     await this.firebaseService.addAnnouncement(application);
+    //     this.router.navigate(['/applications']);
+    //   } catch (error) {
+    //     console.error('Błąd podczas dodawania aplikacji:', error);
+    //   }
+    // } else {
+    //   console.log('Formularz jest nieprawidłowy:', this.applicationForm.errors);
+    // }
   }
 }

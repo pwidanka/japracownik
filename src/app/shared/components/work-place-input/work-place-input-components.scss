@@ -1,0 +1,24 @@
+mat-form-field {
+    width: 100%;
+}
+
+.chip-grid-scroll {
+    ::ng-deep .mdc-evolution-chip-set__chips {
+        max-height: 84px; // wysokość dwóch linii
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+mat-form-field.ng-invalid.ng-touched {
+  .mat-form-field-outline {
+    color: #f44336;
+  }
+}

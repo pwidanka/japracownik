@@ -34,14 +34,18 @@
                     <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
                         <mat-label>Kategoria</mat-label>
                         <mat-select formControlName="category">
-                            <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+                            @for (category of categories; track category) {
+                                <mat-option [value]="category">{{ category }}</mat-option>
+                            }
                         </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
                         <mat-label>Tryb pracy</mat-label>
                         <mat-select formControlName="workMode">
-                            <mat-option *ngFor="let mode of workModes" [value]="mode">{{ mode }}</mat-option>
+                            @for (mode of workModes; track mode) {
+                                <mat-option [value]="mode">{{ mode }}</mat-option>
+                            }
                         </mat-select>
                     </mat-form-field>
 
@@ -53,12 +57,10 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
-                        <mat-label>Miejsce pracy</mat-label>
-                        <mat-select multiple formControlName="workPlace">
-                            <mat-option *ngFor="let place of places" [value]="place">{{ place }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <app-work-place-input style="width: 30%"
+                      [availablePlaces]="places" 
+                      formControlName="workPlace">
+                    </app-work-place-input>
 
                     <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
                         <mat-label>NIP Pracodawcy</mat-label>
@@ -70,7 +72,7 @@
                 <app-skills></app-skills>
 
                 <div fxLayout="row" fxLayoutAlign="end">
-                    <button mat-flat-button color="primary" type="submit" [disabled]="!applicationForm.valid">
+                    <button mat-flat-button color="primary" type="submit">
                         Dodaj aplikację
                     </button>
                 </div>

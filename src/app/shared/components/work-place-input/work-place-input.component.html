@@ -1,0 +1,33 @@
+<mat-form-field appearance="outline" [class.mat-form-field-invalid]="placeCtrl.invalid && placeCtrl.touched && selectedPlaces.length === 0">
+    <mat-label>Miejsce pracy</mat-label>
+    <input type="text"
+           matInput
+           [formControl]="placeCtrl"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipGrid"
+           placeholder="Wpisz lub wybierz miasto"
+           (keydown.enter)="addCustomPlace()">
+    
+    <mat-chip-grid #chipGrid class="chip-grid-scroll">
+        @for (place of selectedPlaces; track place) {
+            <mat-chip (removed)="removePlace(place)">
+                {{place}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        }
+    </mat-chip-grid>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onPlaceSelected($event)">
+        @for (place of filteredPlaces; track place) {
+            <mat-option [value]="place">{{place}}</mat-option>
+        }
+    </mat-autocomplete>
+
+    @if (placeCtrl.invalid && placeCtrl.touched && selectedPlaces.length === 0) {
+        <mat-error>
+            Wybierz przynajmniej jedno miejsce pracy
+        </mat-error>
+    }
+</mat-form-field> 
