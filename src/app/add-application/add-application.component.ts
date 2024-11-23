@@ -73,29 +73,29 @@ export class AddApplicationComponent {
 
   async onSubmit() {
     console.log(this.applicationForm.value);
-    // if (this.applicationForm.valid) {
-    //   try {
-    //     const currentUser = await this.auth.currentUser;
+    if (this.applicationForm.valid) {
+      try {
+        const currentUser = await this.auth.currentUser;
         
-    //     if (!currentUser) {
-    //       console.error('Użytkownik nie jest zalogowany');
-    //       return;
-    //     }
+        if (!currentUser) {
+          console.error('Użytkownik nie jest zalogowany');
+          return;
+        }
 
-    //     const application = {
-    //       ...this.applicationForm.value,
-    //       createdAt: new Date(),
-    //       status: 'pending',
-    //       author: currentUser.uid
-    //     };
+        const application = {
+          ...this.applicationForm.value,
+          createdAt: new Date(),
+          status: 'pending',
+          author: currentUser.uid
+        };
 
-    //     await this.firebaseService.addAnnouncement(application);
-    //     this.router.navigate(['/applications']);
-    //   } catch (error) {
-    //     console.error('Błąd podczas dodawania aplikacji:', error);
-    //   }
-    // } else {
-    //   console.log('Formularz jest nieprawidłowy:', this.applicationForm.errors);
-    // }
+        await this.firebaseService.addAnnouncement(application);
+        this.router.navigate(['/applications']);
+      } catch (error) {
+        console.error('Błąd podczas dodawania aplikacji:', error);
+      }
+    } else {
+      console.log('Formularz jest nieprawidłowy:', this.applicationForm.errors);
+    }
   }
 }

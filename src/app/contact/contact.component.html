@@ -17,28 +17,55 @@
                     <mat-card>
                         <mat-card-title>Formularz kontaktowy</mat-card-title>
                         <mat-card-content>
-                            <form>
+                            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                                     <mat-label>Imię i Nazwisko / Nazwa Firmy</mat-label>
-                                    <input matInput placeholder="Imię i Nazwisko">
+                                    <input matInput formControlName="name" placeholder="Imię i Nazwisko">
+                                    @if (contactForm.get('name')?.errors?.['required']) {
+                                        <mat-error>
+                                            To pole jest wymagane
+                                        </mat-error>
+                                    }
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                                     <mat-label>Temat</mat-label>
-                                    <input matInput placeholder="Temat">
+                                    <input matInput formControlName="subject" placeholder="Temat">
+                                    @if (contactForm.get('subject')?.errors?.['required']) {
+                                        <mat-error>
+                                            To pole jest wymagane
+                                        </mat-error>
+                                    }
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                                     <mat-label>Email</mat-label>
-                                    <input matInput placeholder="Email">
+                                    <input matInput formControlName="email" placeholder="Email">
+                                    @if (contactForm.get('email')?.errors?.['required']) {
+                                        <mat-error>
+                                            To pole jest wymagane
+                                        </mat-error>
+                                    }
+                                    @if (contactForm.get('email')?.errors?.['email']) {
+                                        <mat-error>
+                                            Nieprawidłowy format adresu email
+                                        </mat-error>
+                                    }
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                                     <mat-label>Wiadomość</mat-label>
-                                    <textarea matInput placeholder="Treść wiadomości" style="resize: none;"></textarea>
+                                    <textarea matInput formControlName="message" placeholder="Treść wiadomości" style="resize: none;"></textarea>
+                                    @if (contactForm.get('message')?.errors?.['required']) {
+                                        <mat-error>
+                                            To pole jest wymagane
+                                        </mat-error>
+                                    }
                                 </mat-form-field>
 
-                                <button mat-flat-button>Wyślij Wiadomość</button>
+                                <button mat-flat-button color="primary" type="submit" [disabled]="isSubmitting">
+                                    {{ isSubmitting ? 'Wysyłanie...' : 'Wyślij Wiadomość' }}
+                                </button>
                             </form>
                         </mat-card-content>
                     </mat-card>
