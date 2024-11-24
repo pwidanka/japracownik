@@ -125,4 +125,8 @@ export class FilterAllApplicationsComponent implements OnInit {
   isSelectedAvailability(availability: string): boolean {
     return this.selectedAvailabilities.includes(availability);
   }
+
+  ngOnDestroy() {
+    this.filterService.updateFilters({});
+  }
 }
