@@ -39,7 +39,6 @@ export class AddApplicationComponent {
   applicationForm: FormGroup;
   categories: string[] = [];
   workModes = ['Pełny etat', 'Część etatu', 'Zdalnie', 'Hybrydowo'];
-  places: string[] = [];
 
   constructor(
     private fb: FormBuilder, 
@@ -68,7 +67,6 @@ export class AddApplicationComponent {
 
   ngOnInit() {
     this.categories = this.categoriesService.getCategories().map(cat => cat.name);
-    this.places = this.citiesService.getCities();
   }
 
   async onSubmit() {

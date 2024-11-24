@@ -7,11 +7,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+import { WorkPlaceInputComponent } from '../../shared/components/work-place-input/work-place-input.component';
 
 @Component({
   selector: 'app-filter-all-applications',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, MatCheckboxModule, MatExpansionModule, MatInputModule],
+  imports: [MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, MatCheckboxModule, MatExpansionModule, MatInputModule, WorkPlaceInputComponent],
   templateUrl: './filter-all-applications.component.html',
   styleUrl: './filter-all-applications.component.scss'
 })

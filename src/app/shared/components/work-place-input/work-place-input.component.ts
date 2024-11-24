@@ -7,6 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CitiesService } from '../../../_services/cities.service';
 
 @Component({
   selector: 'app-work-place-input',
@@ -30,14 +31,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   styleUrls: ['./work-place-input-components.scss']
 })
 export class WorkPlaceInputComponent implements ControlValueAccessor, OnInit {
-  @Input() availablePlaces: string[] = [];
+  availablePlaces: string[] = [];
   
   placeCtrl = new FormControl('', [Validators.required]);
   selectedPlaces: string[] = [];
   filteredPlaces: string[] = [];
 
+  constructor(private citiesService: CitiesService) {}  
 
   ngOnInit() {
+    this.availablePlaces = this.citiesService.getCities();
     this.filteredPlaces = [...this.availablePlaces];
 
     this.placeCtrl.setValidators([
