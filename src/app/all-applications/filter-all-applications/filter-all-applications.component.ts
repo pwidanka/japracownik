@@ -11,11 +11,12 @@ import { WorkPlaceInputComponent } from '../../shared/components/work-place-inpu
 import { CategoriesService, Category } from '../../categories/categories.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FilterService, ApplicationFilters } from '../../shared/services/filter.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-filter-all-applications',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, MatCheckboxModule, MatExpansionModule, MatInputModule, WorkPlaceInputComponent, ReactiveFormsModule],
+  imports: [FlexLayoutModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, MatCheckboxModule, MatExpansionModule, MatInputModule, WorkPlaceInputComponent, ReactiveFormsModule],
   templateUrl: './filter-all-applications.component.html',
   styleUrl: './filter-all-applications.component.scss'
 })
@@ -37,7 +38,7 @@ export class FilterAllApplicationsComponent implements OnInit {
   initForm() {
     this.filterForm = this.fb.group({
       searchText: [''],
-      workPlace: [[]],
+      workPlace: [null, []],
       category: [[]],
       workMode: [[]],
       availability: [[]],
@@ -77,8 +78,19 @@ export class FilterAllApplicationsComponent implements OnInit {
   }
 
   resetFilters() {
+    this.selectedCategories = [];
+    this.selectedWorkModes = [];
+    this.selectedAvailabilities = [];
+
+    // Resetowanie formularza z wartościami początkowymi
     this.filterForm.reset({
-      salaryRange: { min: 0, max: 9999 }
+      searchText: '',
+      workPlace: null,
+      category: [],
+      workMode: [],
+      availability: [],
+      status: [],
+      salaryRange: { min: 0, max: 10000 }
     });
   }
 

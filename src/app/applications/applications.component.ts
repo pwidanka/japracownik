@@ -31,6 +31,7 @@ export class ApplicationsComponent implements OnInit {
   ) {
     effect(() => {
       const filters = this.filterService.filters();
+      console.log(filters);
       this.applyFilters(filters);
     });
   }

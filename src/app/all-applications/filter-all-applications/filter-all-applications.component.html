@@ -1,10 +1,13 @@
 <form [formGroup]="filterForm" fxLayout="column" fxLayoutGap="16px" class="filter-container">
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="outline" class="full-width" subscriptSizing="dynamic">
     <mat-label>Wyszukaj po stanowisku lub słowie klucz</mat-label>
     <input matInput formControlName="searchText">
   </mat-form-field>
 
-  <app-work-place-input formControlName="workPlace">
+  <app-work-place-input 
+    formControlName="workPlace"
+    [validateInput]="false"
+    [subscriptSizing]="'dynamic'">
   </app-work-place-input>
 
   <mat-expansion-panel>
@@ -52,5 +55,8 @@
     <span>{{filterForm.get('salaryRange.min')?.value}} - {{filterForm.get('salaryRange.max')?.value}} PLN</span>
   </div>
 
-  <button mat-flat-button class="full-width" (click)="onSearch()">Wyszukaj</button>
+  <div fxLayout="column" fxLayoutGap="16px">
+    <button mat-flat-button class="full-width" (click)="onSearch()">Wyszukaj</button>
+    <button mat-stroked-button class="full-width" (click)="resetFilters()">Resetuj filtry</button>
+  </div>
 </form>

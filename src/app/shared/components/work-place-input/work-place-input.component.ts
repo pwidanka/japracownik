@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { MatFormFieldModule, SubscriptSizing } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -32,10 +32,12 @@ import { CitiesService } from '../../../_services/cities.service';
 })
 export class WorkPlaceInputComponent implements ControlValueAccessor, OnInit {
   availablePlaces: string[] = [];
-  
+  @Input() subscriptSizing: SubscriptSizing = 'fixed';
   placeCtrl = new FormControl('', [Validators.required]);
   selectedPlaces: string[] = [];
   filteredPlaces: string[] = [];
+
+  @Input() validateInput: boolean = true;
 
   constructor(private citiesService: CitiesService) {}  
 
@@ -43,9 +45,14 @@ export class WorkPlaceInputComponent implements ControlValueAccessor, OnInit {
     this.availablePlaces = this.citiesService.getCities();
     this.filteredPlaces = [...this.availablePlaces];
 
-    this.placeCtrl.setValidators([
-      () => this.selectedPlaces.length === 0 ? { 'required': true } : null
-    ]);
+    if (this.validateInput) {
+      this.placeCtrl.setValidators([
+        () => this.selectedPlaces.length === 0 ? { 'required': true } : null
+      ]);
+    } else {
+      this.placeCtrl.clearValidators();
+      this.placeCtrl.updateValueAndValidity();
+    }
 
     this.placeCtrl.valueChanges.subscribe(value => {
       if (typeof value === 'string') {
