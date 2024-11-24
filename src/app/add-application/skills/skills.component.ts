@@ -46,7 +46,8 @@ export class SkillsComponent implements OnInit {
     });
   }
 
-  openEditDialog(property: keyof SkillsComponent, tytul: string): void {
+  openEditDialog(property: keyof SkillsComponent, tytul: string, event: Event): void {
+    event.preventDefault();
     const dialogRef = this.dialog.open(TextAreaDialogComponent, {
       data: { value: this[property], tytul: tytul },
     });
@@ -60,7 +61,8 @@ export class SkillsComponent implements OnInit {
     });
   }
 
-  openEditDialogSkill(skill: string): void {
+  openEditDialogSkill(skill: string, event: Event): void {
+    event.preventDefault();
     const dialogRef = this.dialog.open(SkillsDialogComponent, {
       data: { skill, canDelete: true }
     });
@@ -77,7 +79,8 @@ export class SkillsComponent implements OnInit {
     });
   }
 
-  openAddDialogSkill(): void {
+  openAddDialogSkill(event: Event): void {
+    event.preventDefault();
     const dialogRef = this.dialog.open(SkillsDialogComponent, {
       data: { skill: '', canDelete: false }
     });

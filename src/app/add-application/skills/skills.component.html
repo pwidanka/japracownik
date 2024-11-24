@@ -2,7 +2,7 @@
     <mat-card class="profil-card">
         <mat-card-header>
             <mat-card-title>Profil zawodowy</mat-card-title>
-            <button mat-icon-button (click)="openEditDialog('profilZawodowy', 'Profil zawodowy')">
+            <button mat-icon-button (click)="openEditDialog('profilZawodowy', 'Profil zawodowy', $event)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-card-header>
@@ -14,7 +14,7 @@
     <mat-card class="profil-card">
         <mat-card-header>
             <mat-card-title>Doświadczenie</mat-card-title>
-            <button mat-icon-button (click)="openEditDialog('doswiadczenie', 'Doświadczenie')">
+            <button type="button" mat-icon-button (click)="openEditDialog('doswiadczenie', 'Doświadczenie', $event)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-card-header>
@@ -26,7 +26,7 @@
     <mat-card class="profil-card">
         <mat-card-header>
             <mat-card-title>Wykształcenie</mat-card-title>
-            <button mat-icon-button (click)="openEditDialog('wyksztalcenie', 'Wykształcenie')">
+            <button type="button" mat-icon-button (click)="openEditDialog('wyksztalcenie', 'Wykształcenie', $event)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-card-header>
@@ -38,14 +38,14 @@
     <mat-card class="profil-card">
         <mat-card-header>
             <mat-card-title>Umiejętności</mat-card-title>
-            <button mat-icon-button (click)="openAddDialogSkill()">
+            <button type="button" mat-icon-button (click)="openAddDialogSkill($event)">
                 <mat-icon>add</mat-icon>
             </button>
         </mat-card-header>
         <mat-card-content>
             <mat-chip-set>
                 @for (skill of skills; track skill) {
-                  <mat-chip [removable]="true" (click)="openEditDialogSkill(skill)">
+                  <mat-chip [removable]="true" (click)="openEditDialogSkill(skill, $event)">
                     {{ skill }}
                   </mat-chip>
                 }
