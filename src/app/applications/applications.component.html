@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="applications-list">
             <h2>Ostatnio Dodane Nowe Aplikacje</h2>
-            @for(app of applications; track app){
+            @for(app of filteredApplications; track app){
             <div class="application-card">
                 <div class="details">
                     <h3>{{ app.position }}</h3>

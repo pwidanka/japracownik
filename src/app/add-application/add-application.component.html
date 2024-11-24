@@ -52,9 +52,11 @@
                     <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
                         <mat-label>Dostępność od</mat-label>
                         <mat-icon matPrefix>schedule</mat-icon>
-                        <input matInput formControlName="availableFrom" [matDatepicker]="picker" placeholder="Wybierz datę">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-select formControlName="availableFrom">
+                            @for (availability of availabilities; track availability) {
+                                <mat-option [value]="availability">{{ availability }}</mat-option>
+                            }
+                        </mat-select>
                     </mat-form-field>
 
                     <app-work-place-input fxFlex="30" fxFlex.lt-md="100"

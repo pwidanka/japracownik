@@ -13,7 +13,6 @@ import { FirebaseService } from '../_services/firebase.service';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { CategoriesService } from '../categories/categories.service';
-import { CitiesService } from '../_services/cities.service';
 import { WorkPlaceInputComponent } from '../shared/components/work-place-input/work-place-input.component';
 
 
@@ -39,6 +38,7 @@ export class AddApplicationComponent {
   applicationForm: FormGroup;
   categories: string[] = [];
   workModes = ['Pełny etat', 'Część etatu', 'Zdalnie', 'Hybrydowo'];
+  availabilities: string[] = ['Natychmiast', 'Za 2 tygodnie', 'Za 1 miesiąc', 'Za 3 miesiące', 'Inne'];
 
   constructor(
     private fb: FormBuilder, 
@@ -46,7 +46,6 @@ export class AddApplicationComponent {
     private router: Router,
     private auth: Auth,
     private categoriesService: CategoriesService,
-    private citiesService: CitiesService
   ) {
     this.applicationForm = this.fb.group({
       fullName: ['', Validators.required],

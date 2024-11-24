@@ -1,49 +1,56 @@
-<div fxLayout="column" fxLayoutGap="16px" class="filter-container">
+<form [formGroup]="filterForm" fxLayout="column" fxLayoutGap="16px" class="filter-container">
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Wyszukaj po stanowisku lub słowie klucz</mat-label>
-    <input matInput placeholder="Stanowisko lub słowo klucz">
+    <input matInput formControlName="searchText">
   </mat-form-field>
 
-  <app-work-place-input>
+  <app-work-place-input formControlName="workPlace">
   </app-work-place-input>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Kategoria</mat-panel-title>
     </mat-expansion-panel-header>
-      @for(category of categories; track category.name){
-        <mat-checkbox>{{ category.name }}</mat-checkbox>
-      }
+    @for(category of categories; track category.name){
+    <mat-checkbox [value]="category.name" (change)="onCategoryChange($event, category.name)"
+      [checked]="isSelectedCategory(category.name)">
+      {{ category.name }}
+    </mat-checkbox>
+    }
   </mat-expansion-panel>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Typ pracy</mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-checkbox>Pełen etat</mat-checkbox>
-    <mat-checkbox>Pół etatu</mat-checkbox>
-    <mat-checkbox>Weekendowa</mat-checkbox>
+    @for(workMode of workModes; track workMode){
+    <mat-checkbox [value]="workMode" (change)="onWorkModeChange($event, workMode)"
+      [checked]="isSelectedWorkMode(workMode)">
+      {{ workMode }}
+    </mat-checkbox>
+    }
   </mat-expansion-panel>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Dostępność</mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-checkbox>Natychmiast</mat-checkbox>
-    <mat-checkbox>Za 2 tygodnie</mat-checkbox>
-    <mat-checkbox>Za 1 miesiąc</mat-checkbox>
-    <mat-checkbox>Za 3 miesiące</mat-checkbox>
-    <mat-checkbox>Inne</mat-checkbox>
+    @for(availability of availabilities; track availability){
+    <mat-checkbox [value]="availability" (change)="onAvailabilityChange($event, availability)"
+      [checked]="isSelectedAvailability(availability)">
+      {{ availability }}
+    </mat-checkbox>
+    }
   </mat-expansion-panel>
 
-  <div fxLayout="column" fxLayoutAlign="space-between center" class="salary-filter">
+  <div formGroupName="salaryRange">
     <mat-label>Wynagrodzenie</mat-label>
     <mat-slider min="0" max="9999">
-      <input value="0" matSliderStartThumb>
-      <input value="9999" matSliderEndThumb>
+      <input formControlName="min" matSliderStartThumb>
+      <input formControlName="max" matSliderEndThumb>
     </mat-slider>
-    <span>0 - 9999 PLN</span>
+    <span>{{filterForm.get('salaryRange.min')?.value}} - {{filterForm.get('salaryRange.max')?.value}} PLN</span>
   </div>
 
-  <button mat-flat-button class="full-width">Wyszukaj</button>
-</div>
+  <button mat-flat-button class="full-width" (click)="onSearch()">Wyszukaj</button>
+</form>
