@@ -33,12 +33,12 @@ export class FilterAllApplicationsComponent implements OnInit {
     private categoryService: CategoriesService,
     private filterService: FilterService,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
+
   initForm() {
     this.filterForm = this.fb.group({
       searchText: [''],
-      workPlace: [null, []],
+      workPlace: [[], []],
       category: [[]],
       workMode: [[]],
       availability: [[]],
@@ -48,6 +48,12 @@ export class FilterAllApplicationsComponent implements OnInit {
         max: [10000]
       })
     });
+
+    const currentFilters = this.filterService.filters();
+    if (currentFilters.category?.length) {
+      this.selectedCategories = currentFilters.category;
+      this.filterForm.patchValue({ category: currentFilters.category });
+    }
   }
 
   ngOnInit() {

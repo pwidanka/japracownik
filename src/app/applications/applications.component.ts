@@ -24,15 +24,15 @@ import { FilterService, ApplicationFilters } from '../shared/services/filter.ser
 export class ApplicationsComponent implements OnInit {
   allApplications: any[] = [];
   filteredApplications: any[] = [];
-
+  filters: ApplicationFilters = {};
   constructor(
     private router: Router,
     private filterService: FilterService
   ) {
     effect(() => {
-      const filters = this.filterService.filters();
-      console.log(filters);
-      this.applyFilters(filters);
+      this.filters = this.filterService.filters();
+      console.log(this.filters);
+      this.applyFilters(this.filters);
     });
   }
 
@@ -49,6 +49,7 @@ export class ApplicationsComponent implements OnInit {
       ...doc.data()
     }));
     this.filteredApplications = this.allApplications;
+    this.applyFilters(this.filters);
     console.log(this.allApplications);
   }
   
