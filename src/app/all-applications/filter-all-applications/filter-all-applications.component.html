@@ -11,11 +11,9 @@
     <mat-expansion-panel-header>
       <mat-panel-title>Kategoria</mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-checkbox>IT</mat-checkbox>
-    <mat-checkbox>Inżynieria</mat-checkbox>
-    <mat-checkbox>Praca biurowa</mat-checkbox>
-    <mat-checkbox>Transport & Logistyka</mat-checkbox>
-    <mat-checkbox>Inne</mat-checkbox>
+      @for(category of categories; track category.name){
+        <mat-checkbox>{{ category.name }}</mat-checkbox>
+      }
   </mat-expansion-panel>
 
   <mat-expansion-panel>

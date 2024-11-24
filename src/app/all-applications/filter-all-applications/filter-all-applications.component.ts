@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { WorkPlaceInputComponent } from '../../shared/components/work-place-input/work-place-input.component';
+import { CategoriesService, Category } from '../../categories/categories.service';
 
 @Component({
   selector: 'app-filter-all-applications',
@@ -16,6 +17,12 @@ import { WorkPlaceInputComponent } from '../../shared/components/work-place-inpu
   templateUrl: './filter-all-applications.component.html',
   styleUrl: './filter-all-applications.component.scss'
 })
-export class FilterAllApplicationsComponent {
+export class FilterAllApplicationsComponent implements OnInit {
+  categories: Category[] = [];
 
+  constructor(private categoryService: CategoriesService)  {}
+
+  ngOnInit() {
+    this.categories = this.categoryService.getCategories();
+  }
 }
