@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="applications-list">
             <h2>Ostatnio Dodane Nowe Aplikacje</h2>
-            @for(app of filteredApplications; track app){
+            @for(app of paginatedApplications; track app){
             <div class="application-card">
                 <div class="details">
                     <h3>{{ app.position }}</h3>
@@ -26,6 +26,16 @@
                     Pokaż więcej aplikacji
                 </button>
             </div>
+            }
+
+            @if(!limit){
+            <mat-paginator
+                [length]="filteredApplications.length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 25]"
+                (page)="onPageChange($event)"
+                aria-label="Wybierz stronę">
+            </mat-paginator>
             }
         </div>
     </div>

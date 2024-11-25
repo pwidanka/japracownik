@@ -7,6 +7,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { CommonModule } from '@angular/common';
 import { FilterService, ApplicationFilters } from '../shared/services/filter.service';
+import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
+
+export class PolishPaginatorIntl extends MatPaginatorIntl {
+  override itemsPerPageLabel = 'Pozycji na stronie:';
+  override nextPageLabel = 'Następna strona';
+  override previousPageLabel = 'Poprzednia strona';
+  override firstPageLabel = 'Pierwsza strona';
+  override lastPageLabel = 'Ostatnia strona';
+
+  override getRangeLabel = (page: number, pageSize: number, length: number) => {
+    if (length === 0) {
+      return 'Strona 1 z 1';
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return `Strona ${page + 1} z ${amountPages}`;
+  };
+}
 
 @Component({
   selector: 'app-applications',
@@ -17,7 +35,11 @@ import { FilterService, ApplicationFilters } from '../shared/services/filter.ser
     MatButtonModule,
     FlexLayoutModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatPaginatorModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl }
   ],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.scss'
@@ -27,6 +49,10 @@ export class ApplicationsComponent implements OnInit {
   allApplications: any[] = [];
   filteredApplications: any[] = [];
   filters: ApplicationFilters = {};
+  pageSize = 5;
+  currentPage = 0;
+  paginatedApplications: any[] = [];
+
   constructor(
     private router: Router,
     private filterService: FilterService
@@ -40,6 +66,7 @@ export class ApplicationsComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadApplications();
+    this.updatePaginatedApplications();
   }
 
   async loadApplications() {
@@ -113,5 +140,26 @@ export class ApplicationsComponent implements OnInit {
     if (this.limit) {
       this.filteredApplications = this.filteredApplications.slice(0, this.limit);
     }
+
+    this.currentPage = 0;
+    this.updatePaginatedApplications();
+  }
+
+  private updatePaginatedApplications() {
+    if (this.limit) {
+      this.paginatedApplications = this.filteredApplications;
+    } else {
+      const startIndex = this.currentPage * this.pageSize;
+      this.paginatedApplications = this.filteredApplications.slice(
+        startIndex,
+        startIndex + this.pageSize
+      );
+    }
+  }
+
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePaginatedApplications();
   }
 }
