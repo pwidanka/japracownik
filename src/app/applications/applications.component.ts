@@ -1,7 +1,7 @@
-import { Component, effect, OnInit } from '@angular/core';
+import { Component, effect, OnInit, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
@@ -16,12 +16,14 @@ import { FilterService, ApplicationFilters } from '../shared/services/filter.ser
     MatCardModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.scss'
 })
 export class ApplicationsComponent implements OnInit {
+  @Input() limit?: number;
   allApplications: any[] = [];
   filteredApplications: any[] = [];
   filters: ApplicationFilters = {};
@@ -105,5 +107,11 @@ export class ApplicationsComponent implements OnInit {
   
       return matches;
     });
+
+    this.filteredApplications.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (this.limit) {
+      this.filteredApplications = this.filteredApplications.slice(0, this.limit);
+    }
   }
 }
