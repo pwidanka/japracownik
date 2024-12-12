@@ -6,10 +6,37 @@
 
     <div class="search-bar">
         <div class="search-bar-container">
-            <input type="text" placeholder="Stanowisko, słowo kluczowe" class="input-field" />
-            <input type="text" placeholder="Lokalizacja" class="input-field border-radius-zero" />
-            <input type="text" placeholder="Kategoria" class="input-field border-radius-zero" />
-            <button class="search-button" mat-flat-button>Znajdź pracownika</button>
+            <input matInput [(ngModel)]="searchText" placeholder="Wyszukaj po stanowisku lub słowie klucz"
+                class="input-field" />
+
+            <mat-select appearance="outline" [(ngModel)]="workPlace" placeholder="Lokalizacja"
+                class="input-field border-radius-zero" multiple [hideSingleSelectionIndicator]="true"
+                [panelClass]="'custom-panel'" [compareWith]="compareCities">
+                <mat-select-trigger>
+                    {{workPlace.length > 2
+                    ? workPlace.slice(0,2).join(', ') + ' + ' + (workPlace.length - 2)
+                    : workPlace.join(', ')}}
+                </mat-select-trigger>
+                <mat-option *ngFor="let city of cities" [value]="city">
+                    <mat-icon>location_on</mat-icon>
+                    {{city}}
+                </mat-option>
+            </mat-select>
+
+            <mat-select appearance="outline" [(ngModel)]="category" placeholder="Kategoria"
+                class="input-field border-radius-zero" multiple [hideSingleSelectionIndicator]="true"
+                [panelClass]="'custom-panel'" [compareWith]="compareCategories">
+                <mat-select-trigger>
+                    {{category.length > 2
+                    ? category.slice(0,2).join(', ') + ' + ' + (category.length - 2)
+                    : category.join(', ')}}
+                </mat-select-trigger>
+                <mat-option *ngFor="let cat of categories" [value]="cat.name">
+                    <mat-icon>{{cat.icon}}</mat-icon>
+                    {{cat.name}}
+                </mat-option>
+            </mat-select>
+            <button class="search-button" mat-flat-button (click)="findEmployee()">Znajdź pracownika</button>
         </div>
     </div>
 </div>

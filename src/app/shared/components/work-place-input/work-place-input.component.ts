@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, effect, forwardRef, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatFormFieldModule, SubscriptSizing } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CitiesService } from '../../../_services/cities.service';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-work-place-input',
@@ -39,7 +40,15 @@ export class WorkPlaceInputComponent implements ControlValueAccessor, OnInit {
 
   @Input() validateInput: boolean = true;
 
-  constructor(private citiesService: CitiesService) {}  
+  constructor(private citiesService: CitiesService, private filterService: FilterService) {
+    effect(() => {
+      const filters = this.filterService.filters();
+      if (filters.workPlace) {
+        this.selectedPlaces = filters.workPlace;
+        this.placeCtrl.updateValueAndValidity();
+      }
+    });
+  }  
 
   ngOnInit() {
     this.availablePlaces = this.citiesService.getCities();

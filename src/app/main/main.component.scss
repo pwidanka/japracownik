@@ -29,12 +29,14 @@
 
 .input-field {
     flex: 2;
-    padding: 12px 20px;
     border: none;
     border-radius: 50px 0 0 50px;
     border-right: 1px solid grey;
     font-size: 16px;
+    padding: 0px 16px;
     outline: none;
+    width: auto;
+    background-color: white;
 }
 
 .border-radius-zero {
@@ -49,7 +51,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 200px;
-    height: 42px;
+    height: 48px;
     margin-left: -1px;
 }
 
@@ -67,6 +69,8 @@
         margin-bottom: 10px;
         border-right: none;
         font-size: 14px;
+        min-height: 48px;
+        text-align: center;
     }
 
     .search-button {
@@ -75,6 +79,7 @@
         margin-left: 0;
         font-size: 14px;
         height: 48px;
+        box-sizing: border-box;
     }
     
     .hero-section h1 {
@@ -85,4 +90,23 @@
     .hero-section p {
         font-size: 16px;
     }
+}
+
+::ng-deep {
+  .mat-mdc-select-trigger {
+    height: 48px !important;
+    padding: 10px 16px !important;
+  }
+
+  .mat-mdc-select-value {
+    max-width: 90%;
+  }
+
+  .custom-panel {
+    mat-option {
+      .mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
 }
