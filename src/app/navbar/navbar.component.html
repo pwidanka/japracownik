@@ -1,45 +1,49 @@
-<div style="height: 80vh;">
+<div>
+  @if (!currentUrl().includes('/login') && !currentUrl().includes('/sign-up')) {
   <mat-toolbar color="primary" class="toolbar">
     <div class="desktop-menu">
-      @if (isLoggedIn$ | async) {
-        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span class="logo">Logo</span>
-        <span class="spacer"></span>
-        <div fxShow="true" fxHide.lt-md>
-          <a mat-button [routerLink]="'/'">Strona główna</a>
-          <a mat-button [routerLink]="'/applications'">Aplikacje</a>
-          <a mat-button [routerLink]="'/about-us'">O nas</a>
-          <a mat-button [routerLink]="'/contact'">Kontakt</a>
-        </div>
-      }
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="logo">Logo</span>
+      <span class="spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <a mat-button [routerLink]="'/'">Strona główna</a>
+        <a mat-button [routerLink]="'/applications'">Aplikacje</a>
+        <a mat-button [routerLink]="'/about-us'">O nas</a>
+        <a mat-button [routerLink]="'/contact'">Kontakt</a>
+      </div>
       <span class="spacer"></span>
     </div>
 
     <div class="mobile-actions">
       @if (isLoggedIn$ | async) {
-        <button mat-raised-button color="accent" [routerLink]="'/add-application'">Dodaj</button>
-        <button mat-flat-button (click)="logout()">Wyloguj</button>
+      <button mat-raised-button color="accent" [routerLink]="'/add-application'">Dodaj</button>
+      <button mat-flat-button (click)="logout()">Wyloguj</button>
+      }
+      @if (!(isLoggedIn$ | async)) {
+      <button mat-raised-button color="accent" [routerLink]="'/login'">Zaloguj</button>
+      <button mat-raised-button color="accent" [routerLink]="'/sign-up'">Zarejestruj</button>
       }
     </div>
   </mat-toolbar>
+  }
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        @if (isLoggedIn$ | async) {
-          <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Strona główna</a>
-          <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
-          <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">O nas</a>
-          <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Kontakt</a>
-        }
+        <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Strona główna</a>
+        <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
+        <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">O nas</a>
+        <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Kontakt</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content style="background-color: white;">
       <router-outlet></router-outlet>
+      @if (!currentUrl().includes('/login') && !currentUrl().includes('/sign-up')) {
       <app-footer></app-footer>
+      }
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

@@ -18,12 +18,12 @@ export const routes: Routes = [
     { 
         path: '', 
         component: HomeComponent,
-        canActivate: [authGuard]
+        // canActivate: [authGuard]
     },
     { 
         path: 'applications', 
         component: AllApplicationsComponent,
-        canActivate: [authGuard]
+        // canActivate: [authGuard]
     },
     { 
         path: 'application-details/:id', 
@@ -33,12 +33,12 @@ export const routes: Routes = [
     { 
         path: 'about-us', 
         component: AboutUsComponent,
-        canActivate: [authGuard]
+        // canActivate: [authGuard]
     },
     { 
         path: 'contact', 
         component: ContactComponent,
-        canActivate: [authGuard]
+        // canActivate: [authGuard]
     },
     { 
         path: 'add-application', 

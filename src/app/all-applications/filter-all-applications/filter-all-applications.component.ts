@@ -45,7 +45,7 @@ export class FilterAllApplicationsComponent implements OnInit {
       status: [[]],
       salaryRange: this.fb.group({
         min: [0],
-        max: [10000]
+        max: [50000]
       })
     });
 

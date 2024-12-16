@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, Input } from '@angular/core';
+import { Component, effect, OnInit, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router, RouterModule } from '@angular/router';
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FilterService, ApplicationFilters } from '../shared/services/filter.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
+import { AuthServiceTest } from '../_services/auth.service';
 
 export class PolishPaginatorIntl extends MatPaginatorIntl {
   override itemsPerPageLabel = 'Pozycji na stronie:';
@@ -52,6 +53,7 @@ export class ApplicationsComponent implements OnInit {
   pageSize = 5;
   currentPage = 0;
   paginatedApplications: any[] = [];
+  isLoggedIn$ = inject(AuthServiceTest).isLoggedIn$;
 
   constructor(
     private router: Router,
