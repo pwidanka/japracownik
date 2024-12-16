@@ -70,4 +70,20 @@ export class SignUpComponent {
         return 'Wystąpił błąd podczas rejestracji.';
     }
   }
+
+  loginWithGoogle() {
+    try {
+      this.authService.loginWithGoogle().subscribe({
+        next: (result) => {
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          this.errorMessage = 'Wystąpił błąd podczas logowania przez Google';
+        }
+      });
+
+    } catch (error) {
+      this.errorMessage = 'Wystąpił błąd podczas logowania przez Google';
+    }
+  }
 } 

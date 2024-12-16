@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, user } from "@angular/fire/auth";
 import { from } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -26,5 +26,10 @@ export class AuthServiceTest {
 
     getCurrentUser() {
         return this.auth.currentUser;
+    }
+
+    loginWithGoogle() {
+        const provider = new GoogleAuthProvider();
+        return from(signInWithPopup(this.auth, provider));
     }
 }

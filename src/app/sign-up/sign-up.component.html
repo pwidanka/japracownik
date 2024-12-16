@@ -57,6 +57,16 @@
             Powrót do logowania
           </button>
         </div>
+
+        <div class="separator">
+          <span>lub</span>
+        </div>
+
+        <button mat-stroked-button (click)="loginWithGoogle()" type="button" class="google-button">
+          <span class="google-button-text"><img src="google.svg" alt="Google" width="20" height="20">
+            Zaloguj się przez Google
+          </span>
+        </button>
       </form>
     </mat-card-content>
   </mat-card>
