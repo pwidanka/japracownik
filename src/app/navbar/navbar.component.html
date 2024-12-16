@@ -1,6 +1,6 @@
 <div>
   @if (!currentUrl().includes('/login') && !currentUrl().includes('/sign-up')) {
-  <mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar color="primary" class="toolbar" [class.transparent]="currentUrl() === ('/')">
     <div class="desktop-menu">
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>

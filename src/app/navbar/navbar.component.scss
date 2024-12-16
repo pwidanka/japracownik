@@ -1,12 +1,33 @@
+.transparent {
+  background-color: rgba(0, 0, 0, 0) !important;
+  position: absolute;
+}
+
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  // background-color: rgba(0, 0, 0, 0);
+  background-color: black;
 
   .desktop-menu {
     display: flex;
     align-items: center;
     width: 100%;
+
+    a {
+      color: white;
+      opacity: 0.9;
+      
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     .spacer {
       flex: 1 1 auto;
@@ -15,6 +36,7 @@
     .logo {
       font-weight: bold;
       font-size: 1.5rem;
+      color: white;
     }
 
     a {
@@ -22,7 +44,6 @@
     }
   }
 }
-
   
 @media (max-width: 768px) {
   .toolbar{
