@@ -3,6 +3,7 @@
         <h1 class="app-title">Szczegóły</h1>
     </div>
 
+    @if (isLoggedIn$ | async) {
     <div fxLayoutAlign="center">
         <div class="application-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
             <app-application-details-describe [announcement]="announcement" fxFlex="70">
@@ -10,6 +11,59 @@
             <app-application-details-data [announcement]="announcement" fxFlex="auto">
             </app-application-details-data>
         </div>
+
     </div>
+    } @else {
+    <div class="fb-item">
+        <div class="first-section-wrapper">
+            <div class="gravatar">
+                <ngx-skeleton-loader appearance="circle" [theme]="{ width: '80px', height: '80px' }">
+                </ngx-skeleton-loader>
+            </div>
+            <div class="gravatar-title">
+                <div>
+                    <ngx-skeleton-loader [theme]="{
+                      width: '200px',
+                      'border-radius': '0',
+                      height: '15px',
+                      'margin-bottom': '10px'
+                    }"></ngx-skeleton-loader>
+                </div>
+                <div>
+                    <ngx-skeleton-loader [theme]="{ width: '170px', 'border-radius': '0', height: '15px' }">
+                    </ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
+        <div class="second-section-wrapper">
+            <div class="wrapper">
+                <ngx-skeleton-loader *ngFor="let i of [1,2,3]" [theme]="{
+                    width: '100%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+            </div>
+            <div class="wrapper">
+                <ngx-skeleton-loader [theme]="{
+                    width: '90%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+            </div>
+            <div class="wrapper">
+                <ngx-skeleton-loader 
+                    count="1" 
+                    [theme]="{
+                    width: '60%',
+                    'border-radius': '0',
+                    height: '15px',
+                    'margin-bottom': '10px'
+                  }"></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+    }
 
 </div>
