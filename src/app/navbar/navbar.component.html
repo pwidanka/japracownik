@@ -2,7 +2,7 @@
   @if (!currentUrl().includes('/login') && !currentUrl().includes('/sign-up')) {
   <mat-toolbar color="primary" class="toolbar" [class.transparent]="currentUrl() === ('/')">
     <div class="desktop-menu">
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm style="color: white">
         <mat-icon>menu</mat-icon>
       </button>
       <img [routerLink]="'/'" src="logo.png" alt="Logo" class="logo">

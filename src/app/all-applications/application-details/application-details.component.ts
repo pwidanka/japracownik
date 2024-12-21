@@ -5,14 +5,14 @@ import { ApplicationDetailsDataComponent } from './application-details-data/appl
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../_services/firebase.service';
 import { AuthServiceTest } from '../../_services/auth.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @Component({
   selector: 'app-application-details',
   standalone: true,
-  imports: [ApplicationDetailsDescribeComponent, ApplicationDetailsDataComponent, FlexLayoutModule, AsyncPipe, NgxSkeletonLoaderModule],
+  imports: [ApplicationDetailsDescribeComponent, ApplicationDetailsDataComponent, FlexLayoutModule, AsyncPipe, NgxSkeletonLoaderModule, NgFor],
   templateUrl: './application-details.component.html',
   styleUrl: './application-details.component.scss'
 })
