@@ -96,7 +96,7 @@ export class FilterAllApplicationsComponent implements OnInit {
       workMode: [],
       availability: [],
       status: [],
-      salaryRange: { min: 0, max: 10000 }
+      salaryRange: { min: 0, max: 50000 }
     });
   }
 

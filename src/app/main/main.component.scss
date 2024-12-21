@@ -1,12 +1,12 @@
 /* Stylizacja dla komputerów */
 .job-search-container {
     text-align: center;
-    padding: 50px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../../public/main.jpg');
+    padding: 4%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../../public/main.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    height: 60vh;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

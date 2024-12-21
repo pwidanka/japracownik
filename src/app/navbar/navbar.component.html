@@ -5,7 +5,7 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="logo">Logo</span>
+      <img [routerLink]="'/'" src="logo.png" alt="Logo" class="logo">
       <span class="spacer"></span>
       <div fxShow="true" fxHide.lt-md>
         <a mat-button [routerLink]="'/'">Strona główna</a>
@@ -30,7 +30,7 @@
   }
 
   <mat-sidenav-container>
-    <mat-sidenav #sidenav>
+    <mat-sidenav #sidenav [style.margin-top.px]="currentUrl() === ('/') ? 56 : 0">
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
         <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Strona główna</a>

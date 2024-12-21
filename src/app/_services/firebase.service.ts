@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 export class FirebaseService {
     firestore = inject(Firestore);
 
-    getAnnouncements(): Observable<any[]> {
+    getAnnouncements(): Observable<any> {
         const announcementsRef = collection(this.firestore, 'announcements');
         const q = query(announcementsRef, where('status', '==', 'approved'));
 
