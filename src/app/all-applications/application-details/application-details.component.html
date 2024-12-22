@@ -14,56 +14,72 @@
 
     </div>
     } @else {
-    <div class="fb-item">
-        <div class="first-section-wrapper">
-            <div class="gravatar">
-                <ngx-skeleton-loader appearance="circle" [theme]="{ width: '80px', height: '80px' }">
-                </ngx-skeleton-loader>
+    <div fxLayoutAlign="center">
+        <div class="application-container" fxLayout="column" fxLayoutGap="20px">
+            <div class="restricted-content">
+                Zawartość dostępna tylko dla zarejestrowanych Pracodawców
             </div>
-            <div class="gravatar-title">
-                <div>
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+                <div fxFlex="70">
+                    <div>
+                        <ngx-skeleton-loader appearance="circle" [theme]="{ width: '100px', height: '100px', margin: 0 }">
+                        </ngx-skeleton-loader>
+                    </div>
                     <ngx-skeleton-loader [theme]="{
-                      width: '200px',
-                      'border-radius': '0',
-                      height: '15px',
-                      'margin-bottom': '10px'
-                    }"></ngx-skeleton-loader>
-                </div>
-                <div>
-                    <ngx-skeleton-loader [theme]="{ width: '170px', 'border-radius': '0', height: '15px' }">
+                        width: '80%',
+                        'border-radius': '0',
+                        height: '20px',
+                        'margin-bottom': '15px'
+                        }">
                     </ngx-skeleton-loader>
+
+                    <ngx-skeleton-loader count="2" [theme]="{ width: '60%', 'border-radius': '0', height: '20px' }">
+                    </ngx-skeleton-loader>
+
+
                 </div>
-            </div>
-        </div>
-        <div class="second-section-wrapper">
-            <div class="wrapper">
-                <ngx-skeleton-loader *ngFor="let i of [1,2]" [theme]="{
-                    width: '100%',
-                    'border-radius': '0',
-                    height: '15px',
-                    'margin-bottom': '10px'
-                  }"></ngx-skeleton-loader>
-            </div>
-            <div class="wrapper">
-                <ngx-skeleton-loader [theme]="{
-                    width: '90%',
-                    'border-radius': '0',
-                    height: '15px',
-                    'margin-bottom': '10px'
-                  }"></ngx-skeleton-loader>
-            </div>
-            <div class="wrapper">
-                <ngx-skeleton-loader 
-                    count="1" 
-                    [theme]="{
-                    width: '60%',
-                    'border-radius': '0',
-                    height: '15px',
-                    'margin-bottom': '10px'
-                  }"></ngx-skeleton-loader>
+                <div fxFlex="auto">
+
+                    <ngx-skeleton-loader count="2" [theme]="{
+                        width: '100%',
+                        'border-radius': '0',
+                        height: '20px',
+                        'margin-bottom': '15px'
+                      }">
+                    </ngx-skeleton-loader>
+
+                    <ngx-skeleton-loader [theme]="{
+                        width: '95%',
+                        'border-radius': '0',
+                        height: '20px',
+                        'margin-bottom': '15px'
+                      }">
+                    </ngx-skeleton-loader>
+
+
+                    <ngx-skeleton-loader count="3" [theme]="{
+                        width: '70%',
+                        'border-radius': '0',
+                        height: '20px',
+                        'margin-bottom': '15px'
+                      }">
+                    </ngx-skeleton-loader>
+
+                </div>
             </div>
         </div>
     </div>
     }
 
 </div>
+
+<style>
+    .restricted-content {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff4081;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+</style>

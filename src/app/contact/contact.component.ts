@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-contact',
@@ -20,7 +21,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatIconModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
@@ -28,6 +30,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ContactComponent {
   contactForm: FormGroup;
   isSubmitting = false;
+  submittedPierwszyRaz = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,11 +41,13 @@ export class ContactComponent {
       name: ['', Validators.required],
       subject: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required]
+      message: ['', Validators.required],
+      acceptPolicy: [false, Validators.requiredTrue]
     });
   }
 
   async onSubmit() {
+    this.submittedPierwszyRaz = true;
     if (this.contactForm.valid) {
       this.isSubmitting = true;
       try {

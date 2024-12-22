@@ -5,7 +5,7 @@
 
 .app-title {
     color: white;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 0;
@@ -16,41 +16,9 @@
     padding: 20px;
 }
 
-.fb-item {
-    width: auto;
-    height: auto;
-    margin: 10px auto;
-    border: 1px solid #eaeaea;
-    padding: 10px;
-}
-
-.gravatar {
-    width: 100px;
-    height: 90px;
-}
-
-.gravatar-title {
-    width: 500px;
-    padding: 10px;
-    height: 80px;
-}
-
-.first-section-wrapper,
-.second-section-wrapper {
-    width: 100%;
-    height: auto;
-    flex: 1;
-}
-
-.first-section-wrapper {
-    display: inline-flex;
-}
-
-.second-section-wrapper {
-    margin-top: 30px;
-}
-
-.wrapper {
-    width: 100%;
-    flex: 1;
+.restricted-content {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff4081;
+    margin-top: 10px;
 }

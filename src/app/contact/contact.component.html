@@ -63,6 +63,15 @@
                                     }
                                 </mat-form-field>
 
+                                <mat-checkbox formControlName="acceptPolicy">
+                                    Akceptuję warunki <a href="#/privacy-policy" target="_blank">Polityka Prywatności</a>*
+                                </mat-checkbox>
+                                @if (submittedPierwszyRaz && contactForm.get('acceptPolicy')?.errors?.['required']) {
+                                    <mat-error>
+                                        Musisz zaakceptować warunki polityki prywatności
+                                    </mat-error>
+                                }
+
                                 <button mat-flat-button color="primary" type="submit" [disabled]="isSubmitting">
                                     {{ isSubmitting ? 'Wysyłanie...' : 'Wyślij Wiadomość' }}
                                 </button>
@@ -73,3 +82,4 @@
             </div>
         </div>
     </div>
+</div>
