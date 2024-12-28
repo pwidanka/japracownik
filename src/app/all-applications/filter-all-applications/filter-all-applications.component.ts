@@ -52,7 +52,7 @@ export class FilterAllApplicationsComponent implements OnInit {
     const currentFilters = this.filterService.filters();
     if (currentFilters.category?.length) {
       this.selectedCategories = currentFilters.category;
-      this.filterForm.patchValue({ category: currentFilters.category });
+      this.filterForm.patchValue(currentFilters);
     }
   }
 
@@ -61,6 +61,7 @@ export class FilterAllApplicationsComponent implements OnInit {
     this.categories = this.categoryService.getCategories();
 
     this.filterForm.valueChanges.subscribe((filters: ApplicationFilters) => {
+      console.log(filters);
       this.filterService.updateFilters(filters);
     });
   }

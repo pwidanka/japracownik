@@ -49,6 +49,7 @@
 
 .border-radius-zero {
     border-radius: 0;
+    display: flex;
 }
 
 .search-button {
@@ -106,11 +107,6 @@
 }
 
 ::ng-deep {
-    .mat-mdc-select-trigger {
-        height: 48px !important;
-        padding: 10px 16px !important;
-    }
-
     .custom-panel {
         mat-option {
             .mat-icon {
