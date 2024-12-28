@@ -92,7 +92,7 @@ export class FilterAllApplicationsComponent implements OnInit {
     // Resetowanie formularza z wartościami początkowymi
     this.filterForm.reset({
       searchText: '',
-      workPlace: null,
+      workPlace: [],
       category: [],
       workMode: [],
       availability: [],
