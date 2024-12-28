@@ -48,11 +48,22 @@ export class FirebaseService {
         const employersRef = collection(this.firestore, 'employers');
         const q = query(employersRef, where('uid', '==', uid));
         const snapshot = await getDocs(q);
-        
+
         if (snapshot.empty) return true; // Not an employer, allow login
-        
+
         const employer = snapshot.docs[0].data();
         return employer['status'] === 'approved';
-      }
+    }
+
+    async isApprovedEmployer(uid: string): Promise<boolean> {
+        const employersRef = collection(this.firestore, 'employers');
+        const q = query(employersRef, where('uid', '==', uid));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) return false; // Not an employer at all
+
+        const employer = snapshot.docs[0].data();
+        return employer['status'] === 'approved'; // Only approved employers can view
+    }
 
 }

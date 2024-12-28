@@ -5,28 +5,39 @@ import { ApplicationDetailsDataComponent } from './application-details-data/appl
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../_services/firebase.service';
 import { AuthServiceTest } from '../../_services/auth.service';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { from, Observable, of, switchMap } from 'rxjs';
 
 
 @Component({
   selector: 'app-application-details',
   standalone: true,
-  imports: [ApplicationDetailsDescribeComponent, ApplicationDetailsDataComponent, FlexLayoutModule, AsyncPipe, NgxSkeletonLoaderModule, NgFor],
+  imports: [ApplicationDetailsDescribeComponent, ApplicationDetailsDataComponent, FlexLayoutModule, AsyncPipe, NgxSkeletonLoaderModule],
   templateUrl: './application-details.component.html',
   styleUrl: './application-details.component.scss'
 })
 export class ApplicationDetailsComponent implements OnInit {
   announcement: any;
-  isLoggedIn$ = inject(AuthServiceTest).isLoggedIn$;
+  canViewApplications$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
-    private firebaseService: FirebaseService
-  ) { }
+    private firebaseService: FirebaseService,
+    private authService: AuthServiceTest
+  ) { 
+    this.canViewApplications$ = this.authService.isLoggedIn$.pipe(
+      switchMap((isLoggedIn: boolean) => {
+        if (!isLoggedIn) return of(false);
+        const currentUser = this.authService.getCurrentUser();
+        console.log(currentUser);
+        return from(this.firebaseService.isApprovedEmployer(currentUser?.uid || ''));
+      })
+    );
+  }
 
   ngOnInit(): void {
-    this.isLoggedIn$.subscribe((isLogged: boolean) => {
+    this.canViewApplications$.subscribe((isLogged: boolean) => {
       if (isLogged) {
         this.firebaseService.getAnnouncementById(
           this.route.snapshot.paramMap.get('id') || ''
