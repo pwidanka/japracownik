@@ -1,6 +1,7 @@
 import { inject, Injectable } from "@angular/core";
-import { collection, collectionData, Firestore, query, where, addDoc, doc, updateDoc, deleteDoc, docData } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { collection, collectionData, Firestore, query, where, addDoc, doc, updateDoc, deleteDoc, docData, getDocs } from "@angular/fire/firestore";
+import { map, Observable } from "rxjs";
+import { Employer } from "../_models/employes.interface";
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
@@ -37,4 +38,21 @@ export class FirebaseService {
         const docRef = doc(this.firestore, 'announcements', id);
         return docData(docRef);
     }
+
+    addEmployer(employer: Employer) {
+        const employersRef = collection(this.firestore, 'employers');
+        return addDoc(employersRef, employer);
+    }
+
+    async checkEmployerStatus(uid: string): Promise<boolean> {
+        const employersRef = collection(this.firestore, 'employers');
+        const q = query(employersRef, where('uid', '==', uid));
+        const snapshot = await getDocs(q);
+        
+        if (snapshot.empty) return true; // Not an employer, allow login
+        
+        const employer = snapshot.docs[0].data();
+        return employer['status'] === 'approved';
+      }
+
 }

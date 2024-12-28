@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { AuthServiceTest } from '../_services/auth.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Auth, GoogleAuthProvider } from '@angular/fire/auth';
-import { signInWithPopup } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
+import { FirebaseService } from '../_services/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthServiceTest,
-    private router: Router
+    private router: Router,
+    private firebaseService: FirebaseService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,8 +49,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
-        next: () => {
-          this.router.navigate(['/']);
+        next: async (userCredential) => {
+          const isAllowed = await this.firebaseService.checkEmployerStatus(userCredential.user.uid);
+          
+          if (isAllowed) {
+            this.router.navigate(['/']);
+          } else {
+            this.authService.logout();
+            this.errorMessage = 'Konto pracodawcy oczekuje na zatwierdzenie.';
+          }
         },
         error: (error) => {
           this.errorMessage = this.getErrorMessage(error.code);
