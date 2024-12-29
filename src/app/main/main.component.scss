@@ -1,12 +1,12 @@
 /* Stylizacja dla komputerów */
 .job-search-container {
     text-align: center;
-    padding: 4%;
+    padding: 4% 4% 5% 4%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../../public/main.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    height: 50vh;
+    
 
     .job-search{
         height: 100%;
@@ -71,7 +71,7 @@
 /* Stylizacja responsywna dla telefonów */
 @media (max-width: 768px) {
     .job-search-container {
-        height: 65vh;
+        height: 63vh;
     }
 
     .search-bar-container {

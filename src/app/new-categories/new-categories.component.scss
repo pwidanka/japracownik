@@ -34,3 +34,8 @@
       max-width: 350px;
     }
   }
+
+  :host {
+    display: block;
+    height: 100px;
+}
