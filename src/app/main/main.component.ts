@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { CategoriesService, Category } from '../categories/categories.service';
 import { MatInputModule } from '@angular/material/input';
 import { CitiesService } from '../_services/cities.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NewCategoriesComponent } from '../new-categories/new-categories.component';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +21,9 @@ import { CitiesService } from '../_services/cities.service';
     FormsModule, 
     MatSelectModule,
     CommonModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule,
+    NewCategoriesComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

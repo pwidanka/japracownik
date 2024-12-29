@@ -1,0 +1,10 @@
+<div class="categories-container">
+    @for(category of categories; track category){
+    <mat-card class="category-card" (click)="onCategoryClick(category)">
+        <mat-card-content class="category-card-content">
+            <span class="material-symbols-outlined">{{category.icon}}</span>
+            <p>{{category.name}}</p>
+        </mat-card-content>
+    </mat-card>
+    }
+</div>

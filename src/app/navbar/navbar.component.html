@@ -31,7 +31,7 @@
   <!-- } -->
 
   <mat-sidenav-container>
-    <mat-sidenav #sidenav [style.margin-top.px]="currentUrl() === ('/') ? 56 : 0">
+    <mat-sidenav #sidenav>
       <mat-nav-list>
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
         <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()">Strona główna</a>
