@@ -10,6 +10,7 @@ import { AuthServiceTest } from '../_services/auth.service';
 import { AsyncPipe } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { filter } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -34,6 +35,8 @@ export class NavbarComponent {
   router = inject(Router);
   
   isLoggedIn$ = this.authService.isLoggedIn$;
+  isEmployer$ = this.authService.isEmployer$;
+
   currentUrl = signal('/');
 
   constructor() {

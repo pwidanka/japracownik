@@ -37,17 +37,19 @@ import { WorkPlaceInputComponent } from '../shared/components/work-place-input/w
 export class AddApplicationComponent {
   applicationForm: FormGroup;
   categories: string[] = [];
+  czyEdycja: boolean = false;
   workModes = ['Pełny etat', 'Część etatu', 'Zdalnie', 'Hybrydowo'];
   availabilities: string[] = ['Natychmiast', 'Za 2 tygodnie', 'Za 1 miesiąc', 'Za 3 miesiące', 'Inne'];
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private firebaseService: FirebaseService,
     private router: Router,
     private auth: Auth,
     private categoriesService: CategoriesService,
   ) {
     this.applicationForm = this.fb.group({
+      id: [''], 
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       position: ['', Validators.required],
@@ -66,6 +68,13 @@ export class AddApplicationComponent {
 
   ngOnInit() {
     this.categories = this.categoriesService.getCategories().map(cat => cat.name);
+
+    const state = history.state as { application: any };
+    console.log(state);
+    if (state?.application) {
+      this.czyEdycja = true;
+      this.applicationForm.patchValue(state.application);
+    }
   }
 
   async onSubmit() {
@@ -73,21 +82,31 @@ export class AddApplicationComponent {
     if (this.applicationForm.valid) {
       try {
         const currentUser = await this.auth.currentUser;
-        
+
         if (!currentUser) {
           console.error('Użytkownik nie jest zalogowany');
           return;
         }
 
-        const application = {
-          ...this.applicationForm.value,
-          createdAt: new Date(),
-          status: 'pending',
-          author: currentUser.uid
-        };
+        if (this.czyEdycja) {
+          const application = {
+            ...this.applicationForm.value,
+            updatedAt: new Date(),
+            status: 'pending',
+          };
+          console.log('Edytuję aplikację:', application); 
+          await this.firebaseService.updateAnnouncement(application.id, application);
+        } else {
+          const application = {
+            ...this.applicationForm.value,
+            createdAt: new Date(),
+            status: 'pending',
+            author: currentUser.uid
+          };
+          await this.firebaseService.addAnnouncement(application);
+          this.router.navigate(['/applications']);
+        }
 
-        await this.firebaseService.addAnnouncement(application);
-        this.router.navigate(['/applications']);
       } catch (error) {
         console.error('Błąd podczas dodawania aplikacji:', error);
       }

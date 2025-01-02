@@ -1,6 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="signup-container">
   <mat-card class="signup-card">
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="20px">
+    <mat-card-content>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="10px">
       <mat-card-header fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
         <mat-card-title>Rejestracja</mat-card-title>
         <mat-slide-toggle formControlName="isEmployer" (change)="onEmployerToggle()">
@@ -8,9 +9,8 @@
         </mat-slide-toggle>
       </mat-card-header>
 
-      <mat-card-content>
         @if(signUpForm.get('isEmployer')?.value){
-        <div formGroupName="employerDetails">
+        <ng-container formGroupName="employerDetails">
           <mat-form-field appearance="outline">
             <mat-label>Nazwa firmy</mat-label>
             <input matInput formControlName="companyName">
@@ -34,7 +34,7 @@
               Imię i nazwisko jest wymagane
             </mat-error>
           </mat-form-field>
-        </div>
+        </ng-container>
         }
 
         <mat-form-field appearance="outline">
@@ -91,16 +91,18 @@
           </button>
         </div>
 
-        <div class="separator">
-          <span>lub</span>
-        </div>
+        @if(!signUpForm.get('isEmployer')?.value){
+          <div class="separator">
+            <span>lub</span>
+          </div>
 
-        <button mat-stroked-button (click)="loginWithGoogle()" type="button" class="google-button">
-          <span class="google-button-text"><img src="google.svg" alt="Google" width="20" height="20">
-            Zaloguj się przez Google
-          </span>
-        </button>
-      </mat-card-content>
-    </form>
+          <button mat-stroked-button (click)="loginWithGoogle()" type="button" class="google-button">
+            <span class="google-button-text"><img src="google.svg" alt="Google" width="20" height="20">
+              Zaloguj się przez Google
+            </span>
+          </button>
+        }
+      </form>
+    </mat-card-content>
   </mat-card>
 </div>

@@ -26,14 +26,29 @@ import { ControlContainer, FormGroupDirective } from '@angular/forms';
   ]
 })
 export class SkillsComponent implements OnInit {
-  profilZawodowy = '';
-  doswiadczenie = '';
-  wyksztalcenie = '';
-  skills: string[] = [];
+  get parentForm() {
+    return this.formGroupDirective.form;
+  }
+
+  get profilZawodowy() {
+    return this.parentForm.get('profilZawodowy')?.value || '';
+  }
+
+  get doswiadczenie() {
+    return this.parentForm.get('doswiadczenie')?.value || '';
+  }
+
+  get wyksztalcenie() {
+    return this.parentForm.get('wyksztalcenie')?.value || '';
+  }
+
+  get skills() {
+    return this.parentForm.get('skills')?.value || [];  
+  }
 
   constructor(
     private dialog: MatDialog,
-    private formGroupDirective: FormGroupDirective
+    private  formGroupDirective: FormGroupDirective
   ) {}
 
   ngOnInit() {
@@ -54,9 +69,9 @@ export class SkillsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this[property] = result.value;
-        const parentForm = this.formGroupDirective.form;
-        parentForm.patchValue({ [property]: result.value });
+        this.formGroupDirective.form.patchValue({ 
+          [property]: result.value 
+        });
       }
     });
   }
@@ -68,12 +83,18 @@ export class SkillsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.action === 'delete') {
-        this.skills = this.skills.filter(s => s !== skill);
-      } else if (result?.action === 'save') {
-        const index = this.skills.indexOf(skill);
-        if (index !== -1) {
-          this.skills[index] = result.skill;
+      if (result) {
+        const currentSkills = [...this.formGroupDirective.form.get('skills')?.value || []];
+        
+        if (result.action === 'delete') {
+          const updatedSkills = currentSkills.filter(s => s !== skill);
+          this.formGroupDirective.form.patchValue({ skills: updatedSkills });
+        } else if (result.action === 'save') {
+          const index = currentSkills.indexOf(skill);
+          if (index !== -1) {
+            currentSkills[index] = result.skill;
+            this.formGroupDirective.form.patchValue({ skills: currentSkills });
+          }
         }
       }
     });

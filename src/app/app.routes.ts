@@ -11,6 +11,7 @@ import { authGuard } from './_guards/auth.guard';
 import { TermsComponent } from './footer/terms/terms.component';
 import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import { CookiesComponent } from './footer/cookies/cookies.component';
+import { CustomerPanelComponent } from './customer-panel/customer-panel.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -44,6 +45,16 @@ export const routes: Routes = [
         path: 'add-application', 
         component: AddApplicationComponent,
         canActivate: [authGuard]
+    },
+    { 
+        path: 'edit-application', 
+        component: AddApplicationComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'customer-panel',
+        component: CustomerPanelComponent,
+        canActivate: [authGuard]    
     },
     {
         path: 'terms',

@@ -1,6 +1,10 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="center center" class="app-container">
+        @if(czyEdycja){
+        <h1 class="app-title">Edytuj aplikacje</h1>
+        } @else {   
         <h1 class="app-title">Dodaj aplikacje</h1>
+        }
     </div>
 
     <div fxLayout="row" fxLayoutAlign="center">
@@ -35,7 +39,7 @@
                         <mat-label>Kategoria</mat-label>
                         <mat-select formControlName="category">
                             @for (category of categories; track category) {
-                                <mat-option [value]="category">{{ category }}</mat-option>
+                            <mat-option [value]="category">{{ category }}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
@@ -44,7 +48,7 @@
                         <mat-label>Tryb pracy</mat-label>
                         <mat-select formControlName="workMode">
                             @for (mode of workModes; track mode) {
-                                <mat-option [value]="mode">{{ mode }}</mat-option>
+                            <mat-option [value]="mode">{{ mode }}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
@@ -54,13 +58,12 @@
                         <mat-icon matPrefix>schedule</mat-icon>
                         <mat-select formControlName="availableFrom">
                             @for (availability of availabilities; track availability) {
-                                <mat-option [value]="availability">{{ availability }}</mat-option>
+                            <mat-option [value]="availability">{{ availability }}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
 
-                    <app-work-place-input fxFlex="30" fxFlex.lt-md="100"
-                      formControlName="workPlace">
+                    <app-work-place-input fxFlex="30" fxFlex.lt-md="100" formControlName="workPlace">
                     </app-work-place-input>
 
                     <mat-form-field appearance="outline" fxFlex="30" fxFlex.lt-md="100">
@@ -72,10 +75,16 @@
 
                 <app-skills></app-skills>
 
-                <div fxLayout="row" fxLayoutAlign="end">
+                <div style="margin-top: 15px;">
+                    @if(czyEdycja){
+                    <button mat-flat-button color="primary" type="submit">
+                        Zapisz zmiany
+                    </button>
+                    } @else {
                     <button mat-flat-button color="primary" type="submit">
                         Dodaj aplikację
                     </button>
+                    }
                 </div>
             </form>
         </div>

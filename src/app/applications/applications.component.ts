@@ -47,18 +47,19 @@ export class PolishPaginatorIntl extends MatPaginatorIntl {
 })
 export class ApplicationsComponent implements OnInit {
   @Input() limit?: number;
+  @Input() isPanelCustomer: boolean = false;
   allApplications: any[] = [];
   filteredApplications: any[] = [];
   filters: ApplicationFilters = {};
   pageSize = 5;
   currentPage = 0;
   paginatedApplications: any[] = [];
-  isLoggedIn$ = inject(AuthServiceTest).isLoggedIn$;
 
   constructor(
     private router: Router,
     private filterService: FilterService,
-    private firebaeService: FirebaseService
+    private firebaeService: FirebaseService,
+    private auth: AuthServiceTest
   ) {
     effect(() => {
       this.filters = this.filterService.filters();
@@ -73,16 +74,32 @@ export class ApplicationsComponent implements OnInit {
   }
 
   async loadApplications() {
-    this.firebaeService.getAnnouncements().subscribe(async (applicationsCollection) => {
-      this.allApplications = applicationsCollection
-      this.filteredApplications = this.allApplications;
-      this.applyFilters(this.filters);
-    });
+    if (this.isPanelCustomer) {
+      this.firebaeService.getUserAnnouncements(this.auth.getCurrentUser()!.uid).subscribe(async (applicationsCollection) => {
+        console.log(applicationsCollection);
+        this.allApplications = applicationsCollection
+        this.filteredApplications = this.allApplications;
+        this.applyFilters(this.filters);
+      });
+    } else {
+      this.firebaeService.getAllAnnouncements().subscribe(async (applicationsCollection) => {
+        this.allApplications = applicationsCollection
+        this.filteredApplications = this.allApplications;
+        this.applyFilters(this.filters);
+      });
+    }
     console.log(this.allApplications);
   }
 
   viewApplicationDetails(id: string) {
     this.router.navigate(['/application-details', id]);
+  }
+
+  editMyApplication(app: any) {
+    console.log(app)
+    this.router.navigate(['/edit-application'], {
+      state: { application: app }
+    });
   }
 
   private applyFilters(filters: ApplicationFilters) {

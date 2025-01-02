@@ -7,7 +7,7 @@ import { Employer } from "../_models/employes.interface";
 export class FirebaseService {
     firestore = inject(Firestore);
 
-    getAnnouncements(): Observable<any> {
+    getAllAnnouncements(): Observable<any> {
         const announcementsRef = collection(this.firestore, 'announcements');
         const q = query(announcementsRef, where('status', '==', 'approved'));
 
@@ -39,6 +39,13 @@ export class FirebaseService {
         return docData(docRef);
     }
 
+    // Pobierz ogłoszenia użytkownika
+    getUserAnnouncements(author: string): Observable<any[]> {
+        const announcementsRef = collection(this.firestore, 'announcements');
+        const q = query(announcementsRef, where('author', '==', author));
+        return collectionData(q, { idField: 'id' });
+    }
+
     addEmployer(employer: Employer) {
         const employersRef = collection(this.firestore, 'employers');
         return addDoc(employersRef, employer);
@@ -66,4 +73,21 @@ export class FirebaseService {
         return employer['status'] === 'approved'; // Only approved employers can view
     }
 
+    // Pobierz aplikację użytkownika
+    async getApplicationByUserId(uid: string): Promise<any> {
+        const applicationsRef = collection(this.firestore, 'applications');
+        const q = query(applicationsRef, where('uid', '==', uid));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) return null;
+
+        return snapshot.docs[0].data();
+    }
+
+    // Zaktualizuj aplikację użytkownika
+    updateApplication(application: any) {
+        const applicationsRef = collection(this.firestore, 'applications');
+        const docRef = doc(applicationsRef, application.id);
+        return updateDoc(docRef, application);
+    }
 }

@@ -11,7 +11,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapt
 
 const firebaseConfig = {
   apiKey: "AIzaSyAFKzJ3HzkjgX2lrUyZJoZWRSeDj35gXsY",
-  authDomain: "applyme-da44e.firebaseapp.com",
+  authDomain: "applyme.pl",
   projectId: "applyme-da44e",
   storageBucket: "applyme-da44e.appspot.com",
   messagingSenderId: "191106523585",

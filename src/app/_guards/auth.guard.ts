@@ -1,20 +1,28 @@
 import { inject } from '@angular/core';
 import { Router, type CanActivateFn } from '@angular/router';
 import { AuthServiceTest } from '../_services/auth.service';
-import { map } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthServiceTest);
 
   return authService.isLoggedIn$.pipe(
-    map(isLoggedIn => {
-      if (isLoggedIn) {
-        return true;
+    switchMap(isLoggedIn => {
+      if (!isLoggedIn) {
+        router.navigate(['/login']);
+        return [false];
       }
       
-      router.navigate(['/login']);
-      return false;
+      return authService.isEmployer$.pipe(
+        map(isEmployer => {
+          if (isEmployer) {
+            router.navigate(['/']); // Redirect employers away
+            return false;
+          }
+          return true; // Allow regular users
+        })
+      );
     })
   );
 }; 

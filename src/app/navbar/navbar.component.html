@@ -12,6 +12,11 @@
         <a mat-button [routerLink]="'/applications'">Aplikacje</a>
         <a mat-button [routerLink]="'/about-us'">O nas</a>
         <a mat-button [routerLink]="'/contact'">Kontakt</a>
+        @if (isLoggedIn$ | async) {
+          @if (!(isEmployer$ | async)) {
+          <a mat-button [routerLink]="'/customer-panel'">Panel</a>
+          }
+        } 
       </div>
       <span class="spacer"></span>
       }
@@ -19,16 +24,17 @@
 
     <div class="mobile-actions">
       @if (isLoggedIn$ | async) {
-      <button mat-raised-button color="accent" [routerLink]="'/add-application'">Dodaj</button>
-      <button mat-flat-button (click)="logout()">Wyloguj</button>
+        @if (!(isEmployer$ | async)) {
+          <button mat-raised-button color="accent" [routerLink]="'/add-application'">Dodaj</button>
+        }
+        <button mat-flat-button (click)="logout()">Wyloguj</button>
       }
       @if (!(isLoggedIn$ | async)) {
-      <button mat-raised-button color="accent" [routerLink]="'/login'">Zaloguj</button>
-      <button mat-raised-button color="accent" [routerLink]="'/sign-up'">Zarejestruj</button>
+        <button mat-raised-button color="accent" [routerLink]="'/login'">Zaloguj</button>
+        <button mat-raised-button color="accent" [routerLink]="'/sign-up'">Zarejestruj</button>
       }
     </div>
   </mat-toolbar>
-  <!-- } -->
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
@@ -38,6 +44,11 @@
         <a mat-list-item [routerLink]="'/applications'" (click)="sidenav.toggle()">Aplikacje</a>
         <a mat-list-item [routerLink]="'/about-us'" (click)="sidenav.toggle()">O nas</a>
         <a mat-list-item [routerLink]="'/contact'" (click)="sidenav.toggle()">Kontakt</a>
+        @if (isLoggedIn$ | async) {
+          @if (!(isEmployer$ | async)) {
+        <a mat-list-item [routerLink]="'/customer-panel'" (click)="sidenav.toggle()">Panel</a>
+          }
+        }
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content style="background-color: white;">
